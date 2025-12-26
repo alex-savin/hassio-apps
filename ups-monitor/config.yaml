@@ -24,10 +24,8 @@ options:
   config_path: /data/config.yml
   log_level: info
   poll_interval_seconds: 10
-  ws_listen_addr: :8080
 schema:
   config_path: str
   log_level: "list(debug|info|warn|error)"
-  poll_interval_seconds: int
-  ws_listen_addr: str
+  poll_interval_seconds: int?
 image: "ghcr.io/alex-savin/ups-monitor-addon-{arch}"
