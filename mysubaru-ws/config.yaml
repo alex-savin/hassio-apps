@@ -1,0 +1,27 @@
+---
+name: MySubaru Websocket
+version: "0.0.1"
+slug: mysubaru-ws
+description: Exposes MySubaru vehicle state over websocket for Home Assistant integration.
+url: https://github.com/alex-savin/hassio-apps/mysubaru-ws
+arch:
+  - amd64
+  - aarch64
+startup: services
+boot: auto
+init: false
+ports:
+  8080/tcp: null
+ports_description:
+  8080/tcp: Websocket and health endpoints (host port configurable)
+schema:
+  log_level: str?
+  poll_interval_seconds: int?
+options:
+  log_level: info
+  poll_interval_seconds: 300
+environment:
+  WS_LISTEN_ADDR: ":8080"
+map:
+  - config:rw
+image: "ghcr.io/alex-savin/mysubaru-ws-addon-{arch}"
