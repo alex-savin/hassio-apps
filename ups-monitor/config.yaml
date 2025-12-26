@@ -1,9 +1,9 @@
 ---
 name: UPS Monitor
 version: 0.0.1
-slug: ups-monitor
-description: Expose UPS statuses via ups-monitor for Home Assistant
-url: https://github.com/alex-savin/hassio-apps/ups-monitor
+slug: ups_monitor
+description: Expose UPS statuses via go-ups for Home Assistant
+url: https://github.com/example/go-ups
 arch:
   - aarch64
   - amd64
@@ -19,13 +19,11 @@ map:
 ports:
   8080/tcp: 8080
 ports_description:
-  8080/tcp: ups-monitor API
+  8080/tcp: go-ups API
 options:
-  config_path: /data/config.yml
   log_level: info
   poll_interval_seconds: 10
 schema:
-  config_path: str
   log_level: "list(debug|info|warn|error)"
-  poll_interval_seconds: int?
+  poll_interval_seconds: int
 image: "ghcr.io/alex-savin/ups-monitor-addon-{arch}"
