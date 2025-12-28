@@ -1,9 +1,9 @@
 ---
-name: rtlamr-ws
+name: RTL-SDR (Software-Defined Radio) receiver for Automatic Meter Reading (AMR)
 version: 0.0.1
 slug: rtlamr_ws
 panel_icon: mdi:gauge
-description: RTLAMR to Home Assistant Bridge (Go)
+description: RTL-SDR Automatic Meter Reading Bridge (Go)
 startup: application
 boot: auto
 init: false
