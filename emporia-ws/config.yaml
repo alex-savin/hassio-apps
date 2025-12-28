@@ -1,27 +1,20 @@
 ---
 name: Emporia Vue WebSocket
 version: 0.0.1
-slug: emporia-ws
+slug: emporia_ws
 description: WebSocket bridge for Emporia Vue using go-emporia-vue
+url: https://github.com/alex-savin/hassio-apps/emporia-ws
 arch:
   - amd64
   - arm64
   - armv7
-auth_api: true
-homeassistant_api: false
 startup: services
 boot: auto
 init: false
-ingress: false
-panel_icon: mdi:flash
-panel_title: Emporia Vue
-schema:
-  ws_auth_token: str?
-options:
-  ws_auth_token: ""
+schema: {}
+options: {}
 ports:
   "8080/tcp": null
 environment:
-  WS_AUTH_TOKEN: "{{ ws_auth_token }}"
   ADDON_PORT: "8080"
 image: "ghcr.io/alex-savin/emporia-ws-addon-{arch}"
