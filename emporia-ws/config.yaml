@@ -1,7 +1,7 @@
 ---
 name: Emporia Vue WebSocket
 version: 0.0.1
-slug: emporia_ws
+slug: emporia-ws
 description: WebSocket bridge for Emporia Vue using go-emporia-vue
 arch:
   - amd64
