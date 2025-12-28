@@ -11,8 +11,10 @@ arch:
 startup: services
 boot: auto
 init: false
-schema: {}
-options: {}
+schema:
+  log_level: "list(debug|info|warn|error)"
+options:
+  log_level: info
 ports:
   "8080/tcp": null
 environment:
