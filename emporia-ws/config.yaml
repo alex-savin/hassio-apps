@@ -5,9 +5,11 @@ slug: emporia_ws
 description: WebSocket bridge for Emporia Vue using go-emporia-vue
 url: https://github.com/alex-savin/hassio-apps/emporia-ws
 arch:
+  - aarch64
   - amd64
-  - arm64
+  - armhf
   - armv7
+  - i386
 startup: services
 boot: auto
 init: false
