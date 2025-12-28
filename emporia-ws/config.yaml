@@ -24,3 +24,4 @@ ports:
 environment:
   WS_AUTH_TOKEN: "{{ ws_auth_token }}"
   ADDON_PORT: "{{ addon_port }}"
+image: "ghcr.io/alex-savin/emporia-ws-addon-{arch}"
