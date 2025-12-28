@@ -52,3 +52,4 @@ schema:
       state_class: list(measurement|total|total_increasing)?
       expire_after: int?
       force_update: bool?
+image: "ghcr.io/alex-savin/rtlamr-ws-addon-{arch}"
