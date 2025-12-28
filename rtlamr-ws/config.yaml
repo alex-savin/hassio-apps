@@ -1,0 +1,54 @@
+---
+name: rtlamr-ws
+version: 0.0.1
+slug: rtlamr_ws
+panel_icon: mdi:gauge
+description: RTLAMR to Home Assistant Bridge (Go)
+startup: application
+boot: auto
+init: false
+map:
+  - config:rw
+url: https://github.com/alex-savin/rtlamr-ws
+uart: true
+udev: true
+usb: true
+host_network: false
+hassio_api: true
+ports:
+  8070/tcp: 8070
+arch:
+  - amd64
+  - aarch64
+options:
+  general:
+    sleep_for: 60
+    verbosity: info
+  custom_parameters: {}
+  meters:
+    - id: 22222222
+      protocol: r900
+      name: my_energy_meter
+      format: "######.###"
+      device_class: energy
+
+schema:
+  general:
+    sleep_for: "int?"
+    verbosity: "list(debug|info|warning|critical|none)?"
+    device_id: "match(^[0-9]{3}:[0-9]{3})?"
+    rtltcp_host: match(([\w\d\.]+):(\d+))?
+  custom_parameters:
+    rtltcp: "str?"
+    rtlamr: "str?"
+  meters:
+    - id: int
+      protocol: list(idm|netidm|r900|r900bcd|scm|scm+)
+      name: "str"
+      format: "str?"
+      unit_of_measurement: "str?"
+      icon: "str?"
+      device_class: list(none|current|energy|gas|power|water)
+      state_class: list(measurement|total|total_increasing)?
+      expire_after: int?
+      force_update: bool?
