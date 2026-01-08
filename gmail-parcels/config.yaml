@@ -1,0 +1,26 @@
+---
+name: "Gmail Parcels"
+version: "0.0.1"
+slug: "gmail-parcels"
+description: "Track parcels from Gmail emails using AI"
+url: "https://github.com/alex-savin/go-gmail-parcels"
+startup: application
+boot: auto
+init: false
+arch:
+  - amd64
+options:
+  accounts: []
+schema:
+  accounts:
+    - email: email
+      credentials_file: str
+      token_file: str
+      carriers:
+        - str
+map:
+  - config:rw
+  - share:rw
+ports:
+  5001/tcp: 5001
+image: "ghcr.io/alex-savin/gmail-parcels-addon-{arch}"
