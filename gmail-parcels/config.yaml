@@ -16,11 +16,14 @@ schema:
     - email: email
       credentials_file: str
       token_file: str
+      project_id: str
+      topic_name: str
+      subscription_id: str
       carriers:
         - str
 map:
   - config:rw
   - share:rw
 ports:
-  5001/tcp: 5001
+  8080/tcp: 8080
 image: "ghcr.io/alex-savin/gmail-parcels-addon-{arch}"
