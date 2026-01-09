@@ -21,9 +21,6 @@ schema:
       subscription_id: str
       carriers:
         - str
-map:
-  - config:rw
-  - share:rw
 ports:
   8080/tcp: 8080
 image: "ghcr.io/alex-savin/gmail-parcels-addon-{arch}"
