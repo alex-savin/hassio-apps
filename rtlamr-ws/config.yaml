@@ -16,27 +16,36 @@ usb: true
 host_network: false
 hassio_api: true
 ports:
-  8070/tcp: 8070
+  8080/tcp: 8080
 arch:
   - amd64
   - aarch64
+healthcheck:
+  cmd: "curl -f http://localhost:8080/health || exit 1"
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 60s
 options:
   general:
     sleep_for: 60
     verbosity: info
+    device_id: "0"
   custom_parameters: {}
   meters:
     - id: 22222222
       protocol: r900
-      name: my_energy_meter
+      name: water
       format: "######.###"
-      device_class: energy
+      unit_of_measurement: "gal"
+      device_class: water
+      state_class: total_increasing
 
 schema:
   general:
     sleep_for: "int?"
     verbosity: "list(debug|info|warning|critical|none)?"
-    device_id: "match(^[0-9]{3}:[0-9]{3})?"
+    device_id: "str?"
     rtltcp_host: match(([\w\d\.]+):(\d+))?
   custom_parameters:
     rtltcp: "str?"
