@@ -15,11 +15,13 @@ ports:
 ports_description:
   8080/tcp: Websocket and health endpoints (host port configurable)
 schema:
-  log_level: "list(debug|info|warn|error)"
+  log_level: str?
   poll_interval_seconds: int?
+  location_poll_interval_seconds: int?
 options:
   log_level: info
-  poll_interval_seconds: 300
+  poll_interval_seconds: 60
+  location_poll_interval_seconds: 300
 environment:
   WS_LISTEN_ADDR: ":8080"
 map:
