@@ -1,6 +1,6 @@
 ---
 name: UPS Monitor
-version: 1.0.0
+version: 1.0.1
 slug: ups_monitor
 description: Expose UPS statuses via go-ups for Home Assistant
 url: https://github.com/alex-savin/hassio-addon-ups-monitor
