@@ -1,0 +1,46 @@
+#include <tunables/global>
+
+profile mysubaru-ws flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  # Capabilities
+  capability net_bind_service,
+  capability setuid,
+  capability setgid,
+
+  # S6-Overlay
+  /init ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /run/{s6,s6-rc*,service}/** ixrw,
+  /package/** ix,
+  /command/** ix,
+  /etc/s6*/** ixrw,
+  /etc/s6-overlay/** rwix,
+  /etc/fix-attrs.d/** r,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /etc/services.d/** rwix,
+
+  # Binaries
+  /usr/local/bin/ws-server rix,
+
+  # Data access
+  /config/** rw,
+
+  # System access
+  /dev/tty rw,
+  /proc/*/fd/** rw,
+
+  # Network access (required for websocket server)
+  network inet stream,
+  network inet6 stream,
+  network inet dgram,
+  network inet6 dgram,
+
+  # Deny unnecessary access
+  deny @{PROC}/* w,
+  deny @{PROC}/sys/** w,
+  deny @{PROC}/sysrq-trigger rwklx,
+  deny @{PROC}/kcore rwklx,
+}

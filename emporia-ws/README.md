@@ -1,29 +1,92 @@
-# Hass.io Emporia Vue Add-on (WebSocket bridge)
+# Emporia Vue Websocket Add-on
 
-Thin Go service wrapping `go-emporia-vue` to serve a WebSocket API for the Home Assistant integration. Message contract lives in `docs/websocket-addon.md`.
+[![GitHub Release][releases-shield]][releases]
+[![License][license-shield]](LICENSE)
 
-## Current status (Dec 2025)
-- WebSocket server at `/ws` with `hello`/`ping`/`pong`.
-- Username/password authentication that instantiates a `go-emporia-vue` client per connection.
-- Fetch endpoints: `get_devices`, `get_usage`, `get_properties`, `get_channel_types`.
-- Controls: `toggle_outlet`, `toggle_evse` (with charging rate fields).
-- Usage subscriptions: per-subscription ticker with immediate first payload; `unsubscribe` cancels.
-- Writes are serialized per connection to avoid concurrent websocket writes.
-- Aux HTTP: `/healthz` liveness and `/metrics` plain-text counters (connections/messages).
+This Home Assistant add-on exposes Emporia Vue energy monitor data over a WebSocket interface.
 
-## Running (dev)
-```bash
-GO111MODULE=on go run ./hassio-emporia-vue-addon
+## Features
+
+- **Push-based updates**: The add-on polls the Emporia API and broadcasts snapshots to all connected clients
+- **Persistent authentication**: Credentials are stored and reused across restarts
+- **Device and channel data**: Provides both device-level and per-circuit usage information
+- **Outlet/EVSE control**: Toggle smart outlets and EV chargers
+- **Multi-language support**: Translated into 8 languages
+
+## Installation
+
+1. Add this repository to your Home Assistant add-on store
+2. Install the "Emporia Vue Websocket" add-on
+3. Start the add-on
+4. Connect to the WebSocket endpoint and authenticate with your Emporia credentials
+
+## Configuration
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `log_level` | Logging verbosity (debug, info, warn, error) | `info` |
+| `poll_interval_seconds` | How often to poll Emporia API (in seconds) | `60` |
+
+## WebSocket API
+
+Connect to `ws://<addon-ip>:8080/ws`
+
+### Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `/ws` | WebSocket connection |
+| `/health` | Health check endpoint |
+
+### Messages
+
+**Hello** (server → client):
+```json
+{"type": "hello", "version": "1.0.0", "capabilities": ["usage", "control", "channels", "push"]}
 ```
 
-Environment variables:
-- `ADDON_PORT` (default `8283`)
-- `ADDON_ADDR` (default `0.0.0.0`)
-	(defaults updated: `ADDON_PORT` now `8080`)
-- `CREDENTIALS_FILE` (default `/data/credentials.yaml`) sets where Emporia tokens are persisted (mode 0600). Internally forwarded as `EMPORIA_CREDENTIALS_FILE` for the client library.
-- `WS_AUTH_TOKEN` (optional) enforces shared-secret auth; send `Authorization: Bearer <token>` or `?token=` when connecting to `/ws`.
+**Authenticate** (client → server):
+```json
+{"type": "authenticate", "username": "your-emporia-email", "password": "your-emporia-password"}
+```
 
-## TODO
-- Persist credentials/tokens to `/data` and prefer token reuse.
-- Add health/metrics endpoints.
-- Optional TLS or shared-secret socket auth.
+**Auth Result** (server → client):
+```json
+{"type": "auth_result", "success": true}
+```
+
+**Snapshot** (server → client, push):
+```json
+{
+  "type": "snapshot",
+  "timestamp": "2026-01-12T12:00:00Z",
+  "devices": [...],
+  "usage": {...}
+}
+```
+
+**Control** (client → server):
+```json
+{"type": "control", "device_gid": 12345, "outlet_on": true}
+```
+
+## Building
+
+```bash
+# Build binary only
+./build.sh
+
+# Build Docker image
+BUILD_IMAGE=1 TARGETARCH=amd64 ./build.sh
+```
+
+## Support
+
+- [Documentation](docs/websocket-addon.md)
+- [Changelog](CHANGELOG.md)
+- [Report an issue](https://github.com/alex-savin/hassio-addon-emporia-vue-ws/issues)
+
+[releases-shield]: https://img.shields.io/github/v/release/alex-savin/hassio-addon-emporia-vue-ws
+[releases]: https://github.com/alex-savin/hassio-addon-emporia-vue-ws/releases
+[license-shield]: https://img.shields.io/github/license/alex-savin/hassio-addon-emporia-vue-ws
+

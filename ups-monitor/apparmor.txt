@@ -1,0 +1,44 @@
+#include <tunables/global>
+
+profile ups_monitor flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  # Capabilities
+  capability net_bind_service,
+  capability net_raw,
+
+  # Network access
+  network inet stream,
+  network inet dgram,
+  network inet6 stream,
+  network inet6 dgram,
+
+  # Data directory access
+  /data/** rw,
+
+  # Config and runtime files
+  /config/** r,
+  /run/** rw,
+  /tmp/** rw,
+
+  # Binary execution
+  /usr/bin/ups-server rmix,
+
+  # System libraries and files
+  /lib/** rm,
+  /usr/lib/** rm,
+  /etc/passwd r,
+  /etc/group r,
+  /etc/hosts r,
+  /etc/resolv.conf r,
+  /etc/ssl/** r,
+
+  # Proc filesystem (limited)
+  /proc/sys/net/** r,
+
+  # Deny write access to sensitive areas
+  deny /etc/** w,
+  deny /bin/** w,
+  deny /sbin/** w,
+  deny /usr/** w,
+}

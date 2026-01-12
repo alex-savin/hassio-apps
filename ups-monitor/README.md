@@ -1,26 +1,81 @@
 # UPS Monitor Home Assistant Add-on
 
-This add-on packages the `go-ups` server for Home Assistant.
+[![CI](https://github.com/alex-savin/hassio-addon-ups-monitor/actions/workflows/ci.yaml/badge.svg)](https://github.com/alex-savin/hassio-addon-ups-monitor/actions/workflows/ci.yaml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+This add-on packages the `go-ups-monitor` server for Home Assistant, providing real-time UPS monitoring capabilities.
 
 ## Features
-- Starts empty and accepts UPS registrations via the integration (`/api/device`).
-- Exposes WebSocket `/ws`, health `/health`, and status `/api/status` endpoints.
-- Persists config to `/data/config.yml` inside the add-on container.
 
-## Configuration (add-on options)
-```json
-{
-   "config_path": "/data/config.yml"
-}
+- 🔌 Accepts UPS registrations via the integration (`/api/device`)
+- 📡 Real-time WebSocket updates (`/ws`)
+- ❤️ Health check endpoint (`/healthz`)
+- 📊 Status API endpoint (`/api/status`)
+- 💾 Persists configuration to `/data/config.yml`
+- 🏗️ Multi-architecture support (amd64, aarch64)
+
+## Installation
+
+### From GitHub Container Registry
+
+1. Add this repository as a Home Assistant add-on repository
+2. Find "UPS Monitor" in the add-on store and install it
+3. Configure the add-on options and start it
+
+### Local Build
+
+```bash
+docker build -t local/ups-monitor .
 ```
 
+## Configuration
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `log_level` | string | `info` | Log verbosity: `debug`, `info`, `warn`, `error` |
+| `poll_interval_seconds` | int | `10` | How often to poll UPS devices for status |
+
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/ws` | WebSocket | Real-time UPS status updates |
+| `/healthz` | GET | Health check |
+| `/api/status` | GET | Current status of all UPS devices |
+| `/api/device` | POST | Register a new UPS device |
+
 ## Ports
-- 8080/tcp: go-ups API (must be exposed/mapped if accessed outside Supervisor network).
 
-## Build Notes
-- Dockerfile supports multi-arch; Home Assistant build system supplies `BUILD_FROM` and `TARGETARCH`.
+- **8080/tcp**: API server (must be exposed if accessed outside Supervisor network)
 
-## Usage
-1. Add this repository as a local add-on repo or build locally: `docker build -t local/ups-monitor -f hassio-addon-ups/Dockerfile .`
-2. Start the add-on; it listens on port 8080 with an empty config.
-3. In Home Assistant, add the "UPS Monitor" integration and register each UPS (type, name, host, port, credentials, attributes). The integration calls `/api/device`, which validates, persists, and starts polling.
+## Translations
+
+The add-on UI is available in multiple languages:
+- 🇺🇸 English, 🇩🇪 German, 🇪🇸 Spanish, 🇫🇷 French, 🇮🇹 Italian
+- 🇳🇱 Dutch, 🇵🇹 Portuguese, 🇷🇺 Russian, 🇺🇦 Ukrainian, 🇨🇳 Chinese (Simplified)
+
+Translation files are located in the `translations/` folder.
+
+## Development
+
+### Prerequisites
+
+- Go 1.25+
+- Docker (for building the add-on)
+
+### Build
+
+```bash
+# Build Go binary
+go build -o ups-server ./cmd/ups-server
+
+# Run tests
+go test -v ./...
+
+# Build Docker image
+docker build -t ups-monitor .
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
