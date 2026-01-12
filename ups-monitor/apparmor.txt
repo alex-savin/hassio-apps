@@ -22,7 +22,7 @@ profile ups_monitor flags=(attach_disconnected,mediate_deleted) {
 
   # Config and runtime files
   /config/** r,
-  /run/** rw,
+  /run/** rwix,
   /tmp/** rw,
 
   # s6-overlay init system
