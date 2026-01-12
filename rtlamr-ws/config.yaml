@@ -1,31 +1,22 @@
 ---
-name: RTL-SDR (Software-Defined Radio) receiver for Automatic Meter Reading (AMR)
-version: 0.0.1
+name: RTL-SDR Automatic Meter Reading (AMR) Receiver
+version: 1.0.0
 slug: rtlamr_ws
-panel_icon: mdi:gauge
-description: RTL-SDR Automatic Meter Reading Bridge (Go)
-startup: application
-boot: auto
-init: false
-map:
-  - config:rw
-url: https://github.com/alex-savin/rtlamr-ws
-uart: true
-udev: true
-usb: true
-host_network: false
-hassio_api: true
-ports:
-  8080/tcp: 8080
+url: https://github.com/alex-savin/hassio-addon-rtlamr-ws
+description: RTL-SDR Automatic Meter Reading Bridge
 arch:
   - amd64
   - aarch64
-healthcheck:
-  cmd: "curl -f http://localhost:8080/health || exit 1"
-  interval: 30s
-  timeout: 10s
-  retries: 3
-  start_period: 60s
+init: false
+uart: true
+udev: true
+usb: true
+hassio_api: true
+panel_icon: mdi:gauge
+ports:
+  8080/tcp: 8080
+ports_description:
+  8080/tcp: Websocket and health endpoints (host port configurable)
 options:
   general:
     sleep_for: 60
@@ -40,7 +31,6 @@ options:
       unit_of_measurement: "gal"
       device_class: water
       state_class: total_increasing
-
 schema:
   general:
     sleep_for: "int?"
@@ -61,4 +51,4 @@ schema:
       state_class: list(measurement|total|total_increasing)?
       expire_after: int?
       force_update: bool?
-image: "ghcr.io/alex-savin/rtlamr-ws-addon-{arch}"
+image: "ghcr.io/alex-savin/{arch}-addon-rtlamr-ws"

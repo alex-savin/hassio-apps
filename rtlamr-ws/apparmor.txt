@@ -1,0 +1,75 @@
+#include <tunables/global>
+
+profile rtlamr_ws flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  # Capabilities
+  capability chown,
+  capability dac_override,
+  capability dac_read_search,
+  capability fowner,
+  capability fsetid,
+  capability kill,
+  capability net_bind_service,
+  capability net_raw,
+  capability setgid,
+  capability setuid,
+  capability sys_admin,
+  capability sys_rawio,
+
+  # S6-Overlay
+  /init rx,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /run/{s6,s6-rc*,service}/** mrwklix,
+  /package/** mrwklix,
+  /command/** mrwklix,
+  /{,var/}run/{s6,s6-rc*,service}/** mrwklix,
+
+  # Bashio
+  /usr/lib/bashio/** ix,
+  /tmp/** mrwkl,
+
+  # Data access
+  /data/** rw,
+
+  # Programs
+  /usr/bin/rtlamr mrix,
+  /usr/bin/rtl_tcp mrix,
+  /usr/bin/rtl_* mrix,
+  /usr/bin/rtlamr-ws mrix,
+  /usr/bin/curl mrix,
+  /usr/bin/jq mrix,
+  /usr/bin/yq mrix,
+
+  # Libraries
+  /usr/lib/** rm,
+  /lib/** rm,
+
+  # USB device access for RTL-SDR
+  /dev/bus/usb/** rw,
+  /dev/usb/** rw,
+  /sys/bus/usb/** r,
+  /sys/class/usb_device/** r,
+  /sys/devices/**/usb*/** r,
+
+  # Proc filesystem
+  /proc/** r,
+  /proc/sys/net/** rw,
+
+  # Network
+  network inet stream,
+  network inet dgram,
+  network inet6 stream,
+  network inet6 dgram,
+  network netlink raw,
+
+  # Deny write access to sensitive areas
+  deny /proc/sys/** w,
+  deny /sys/** w,
+
+  # Misc
+  /etc/** r,
+  /run/** mrwkl,
+  /var/run/** mrwkl,
+}
