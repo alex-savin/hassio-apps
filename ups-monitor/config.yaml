@@ -9,6 +9,7 @@ arch:
   - amd64
 startup: services
 init: false
+apparmor: false
 map:
   - type: data
     read_only: false
