@@ -6,6 +6,10 @@ profile ups_monitor flags=(attach_disconnected,mediate_deleted) {
   # Capabilities
   capability net_bind_service,
   capability net_raw,
+  capability chown,
+  capability dac_override,
+  capability setuid,
+  capability setgid,
 
   # Network access
   network inet stream,
@@ -21,8 +25,20 @@ profile ups_monitor flags=(attach_disconnected,mediate_deleted) {
   /run/** rw,
   /tmp/** rw,
 
+  # s6-overlay init system
+  /init rix,
+  /command/** rix,
+  /package/** rix,
+
+  # Shell access for s6 scripts
+  /bin/sh rix,
+  /bin/bash rix,
+  /usr/bin/bashio rix,
+  /usr/bin/env rix,
+
   # Binary execution
   /usr/bin/ups-server rmix,
+  /usr/local/bin/ups-server rmix,
 
   # System libraries and files
   /lib/** rm,
@@ -32,6 +48,8 @@ profile ups_monitor flags=(attach_disconnected,mediate_deleted) {
   /etc/hosts r,
   /etc/resolv.conf r,
   /etc/ssl/** r,
+  /etc/cont-init.d/** rix,
+  /etc/services.d/** rix,
 
   # Proc filesystem (limited)
   /proc/sys/net/** r,

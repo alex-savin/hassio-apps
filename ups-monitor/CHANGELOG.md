@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Updated s6-overlay shebang paths from `/usr/bin/with-contenv` to `/command/with-contenv` for s6-overlay v3 compatibility
+- Fixed AppArmor profile to allow s6-overlay init system (`/init`, `/command/**`), shells, and correct binary path
 - Fixed "Permission denied" error on container shutdown
 
 ## [1.0.0] - 2026-01-11
@@ -25,6 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable poll interval for UPS status updates
 - Translations for 10 languages (EN, DE, ES, FR, IT, NL, PT, RU, UK, ZH)
 
-[Unreleased]: https://github.com/alex-savin/ups-monitor-addon/compare/v1.0.1...HEAD
-[1.0.1]: https://github.com/alex-savin/ups-monitor-addon/compare/v1.0.0...v1.0.1
-[1.0.0]: https://github.com/alex-savin/ups-monitor-addon/releases/tag/v1.0.0
+[Unreleased]: https://github.com/alex-savin/ups-monitor-addon/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/alex-savin/ups-monitor-addon/compare/1.0.0...1.0.1
+[1.0.0]: https://github.com/alex-savin/ups-monitor-addon/releases/tag/1.0.0
