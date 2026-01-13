@@ -3,6 +3,10 @@
 profile ups_monitor flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
+  # Allow broad file access (standard for HA add-ons)
+  file,
+  signal,
+
   # Capabilities
   capability net_bind_service,
   capability net_raw,
@@ -10,35 +14,56 @@ profile ups_monitor flags=(attach_disconnected,mediate_deleted) {
   capability dac_override,
   capability setuid,
   capability setgid,
+  capability fowner,
+  capability fsetid,
+  capability kill,
+  capability sys_chroot,
 
   # Network access
   network inet stream,
   network inet dgram,
   network inet6 stream,
   network inet6 dgram,
+  network unix stream,
+  network unix dgram,
+
+  # s6-overlay v3 init system
+  /init rix,
+  /command/** rix,
+  /package/** rix,
+
+  # s6-overlay runtime and service files
+  /run/** rwkix,
+  /run/s6/** rwkix,
+  /run/s6-rc/** rwkix,
+
+  # s6-overlay v3 service structure
+  /etc/s6-overlay/** rix,
+
+  # Legacy s6 paths (for compatibility)
+  /etc/s6/** rix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+
+  # Shell and utilities for s6 scripts
+  /bin/** ix,
+  /sbin/** ix,
+  /usr/bin/** ix,
+  /usr/sbin/** ix,
+
+  # Bashio library
+  /usr/lib/bashio/** ix,
+
+  # Binary execution
+  /usr/local/bin/** rmix,
 
   # Data directory access
   /data/** rw,
 
   # Config and runtime files
   /config/** r,
-  /run/** rwix,
-  /tmp/** rw,
-
-  # s6-overlay init system
-  /init rix,
-  /command/** rix,
-  /package/** rix,
-
-  # Shell access for s6 scripts
-  /bin/sh rix,
-  /bin/bash rix,
-  /usr/bin/bashio rix,
-  /usr/bin/env rix,
-
-  # Binary execution
-  /usr/bin/ups-server rmix,
-  /usr/local/bin/ups-server rmix,
+  /tmp/** rwk,
 
   # System libraries and files
   /lib/** rm,
@@ -48,15 +73,18 @@ profile ups_monitor flags=(attach_disconnected,mediate_deleted) {
   /etc/hosts r,
   /etc/resolv.conf r,
   /etc/ssl/** r,
-  /etc/cont-init.d/** rix,
-  /etc/services.d/** rix,
+  /etc/localtime r,
 
-  # Proc filesystem (limited)
+  # Proc filesystem
+  /proc/** r,
   /proc/sys/net/** r,
 
-  # Deny write access to sensitive areas
-  deny /etc/** w,
-  deny /bin/** w,
-  deny /sbin/** w,
-  deny /usr/** w,
+  # Dev filesystem
+  /dev/null rw,
+  /dev/zero r,
+  /dev/urandom r,
+  /dev/random r,
+  /dev/tty rw,
+  /dev/console rw,
+  /dev/pts/* rw,
 }

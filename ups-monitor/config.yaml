@@ -2,14 +2,13 @@
 name: UPS Monitor
 version: 1.0.1
 slug: ups_monitor
-description: Expose UPS statuses via go-ups for Home Assistant
-url: https://github.com/alex-savin/hassio-addon-ups-monitor
+description: Expose UPS statuses via go-ups-monitor for Home Assistant
+url: https://github.com/alex-savin/hassio-apps/ups-monitor
 arch:
   - aarch64
   - amd64
 startup: services
 init: false
-apparmor: false
 map:
   - type: data
     read_only: false

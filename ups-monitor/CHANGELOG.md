@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.1] - 2026-01-12
 
+### Changed
+- Switched to community base image `ghcr.io/hassio-addons/base:19.0.0` for better s6-overlay v3 support
+- Migrated from legacy `services.d` to modern `s6-rc.d` service structure
+- Disabled custom AppArmor profile (was causing startup failures)
+
 ### Fixed
 - Updated s6-overlay shebang paths from `/usr/bin/with-contenv` to `/command/with-contenv` for s6-overlay v3 compatibility
-- Fixed AppArmor profile to allow s6-overlay init system (`/init`, `/command/**`), shells, and correct binary path
-- Fixed "Permission denied" error on container shutdown
+- Fixed "Permission denied" and "s6-svscan already running" errors on container startup
 
 ## [1.0.0] - 2026-01-11
 
