@@ -1,6 +1,6 @@
 ---
 name: Emporia Vue Websocket
-version: "1.0.0"
+version: "1.0.1"
 slug: emporia-vue-ws
 description: >-
   Exposes Emporia Vue energy monitor data over websocket

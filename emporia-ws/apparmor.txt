@@ -1,67 +1,90 @@
 #include <tunables/global>
 
-profile emporia-vue-ws flags=(attach_disconnected,mediate_deleted) {
+profile emporia_vue_ws flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
+
+  # Allow broad file access (standard for HA add-ons)
+  file,
+  signal,
 
   # Capabilities
   capability net_bind_service,
+  capability net_raw,
   capability chown,
   capability dac_override,
-  capability setgid,
   capability setuid,
+  capability setgid,
+  capability fowner,
+  capability fsetid,
+  capability kill,
+  capability sys_chroot,
 
-  # S6-Overlay
-  /init rx,
-  /bin/** ix,
-  /usr/bin/** ix,
-  /run/{s6,s6-rc*,service}/** rwix,
-  /package/** ix,
-  /command/** ix,
+  # Network access
+  network inet stream,
+  network inet dgram,
+  network inet6 stream,
+  network inet6 dgram,
+  network unix stream,
+  network unix dgram,
+
+  # s6-overlay v3 init system
+  /init rix,
+  /command/** rix,
+  /package/** rix,
+
+  # s6-overlay runtime and service files
+  /run/** rwkix,
+  /run/s6/** rwkix,
+  /run/s6-rc/** rwkix,
+
+  # s6-overlay v3 service structure
+  /etc/s6-overlay/** rix,
+
+  # Legacy s6 paths (for compatibility)
   /etc/s6/** rix,
-  /etc/s6-overlay/** rwix,
-  /etc/cont-init.d/** rwix,
   /etc/services.d/** rwix,
-  /dev/tty rw,
-  /var/run/** rw,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
 
-  # Bashio
+  # Shell and utilities for s6 scripts
+  /bin/** ix,
+  /sbin/** ix,
+  /usr/bin/** ix,
+  /usr/sbin/** ix,
+
+  # Bashio library
   /usr/lib/bashio/** ix,
-  /tmp/** rwk,
 
-  # Access to options.json and other files within your addon
+  # Binary execution
+  /usr/local/bin/** rmix,
+
+  # Data directory access
   /data/** rw,
 
-  # Start main binary
-  /usr/bin/ws-server cx -> ws_server,
+  # Config and runtime files
+  /config/** r,
+  /tmp/** rwk,
 
-  profile ws_server flags=(attach_disconnected,mediate_deleted) {
-    #include <abstractions/base>
+  # System libraries and files
+  /lib/** rm,
+  /usr/lib/** rm,
+  /etc/passwd r,
+  /etc/group r,
+  /etc/hosts r,
+  /etc/resolv.conf r,
+  /etc/ssl/** r,
+  /etc/localtime r,
 
-    # Network access
-    network inet stream,
-    network inet6 stream,
-    network inet dgram,
-    network inet6 dgram,
+  # Proc filesystem
+  /proc/** r,
+  /proc/sys/net/** r,
 
-    # Capabilities for binding to port
-    capability net_bind_service,
-
-    # Binary execution
-    /usr/bin/ws-server mr,
-
-    # Config and data access
-    /data/** rw,
-
-    # Temporary files
-    /tmp/** rwk,
-
-    # System info
-    /proc/sys/net/** r,
-    /etc/resolv.conf r,
-    /etc/hosts r,
-    /etc/nsswitch.conf r,
-    /etc/ssl/** r,
-    /usr/share/ca-certificates/** r,
-    /etc/ca-certificates/** r,
-  }
+  # Dev filesystem
+  /dev/null rw,
+  /dev/zero r,
+  /dev/urandom r,
+  /dev/random r,
+  /dev/tty rw,
+  /dev/console rw,
+  /dev/pts/* rw,
 }

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-01-12
+
+### Changed
+
+- Migrated to s6-overlay v3 service management (s6-rc.d structure)
+- Updated base image to `ghcr.io/hassio-addons/base:19.0.0`
+- Refactored Dockerfile with separate build stages for rtl-sdr and Go service
+- Moved binary to `/usr/local/bin/rtlamr-ws`
+- Updated AppArmor profile for s6-overlay v3 compatibility
+
+### Removed
+
+- Deprecated s6-overlay v2 directories (cont-init.d, services.d)
+
 ## [1.0.0] - 2026-01-11
 
 ### Added
@@ -41,5 +55,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `custom_parameters.rtlamr` - Additional rtlamr arguments
 - `meters` - List of meter configurations with protocol, format, and Home Assistant attributes
 
-[Unreleased]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/releases/tag/v1.0.0
+[Unreleased]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/compare/1.0.0...1.0.1
+[1.0.0]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/releases/tag/1.0.0

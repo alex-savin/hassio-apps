@@ -3,48 +3,99 @@
 profile rtlamr_ws flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
+  # Allow broad file access (standard for HA add-ons)
+  file,
+  signal,
+
   # Capabilities
+  capability net_bind_service,
+  capability net_raw,
   capability chown,
   capability dac_override,
   capability dac_read_search,
+  capability setuid,
+  capability setgid,
   capability fowner,
   capability fsetid,
   capability kill,
-  capability net_bind_service,
-  capability net_raw,
-  capability setgid,
-  capability setuid,
+  capability sys_chroot,
   capability sys_admin,
   capability sys_rawio,
 
-  # S6-Overlay
-  /init rx,
+  # Network access
+  network inet stream,
+  network inet dgram,
+  network inet6 stream,
+  network inet6 dgram,
+  network unix stream,
+  network unix dgram,
+  network netlink raw,
+
+  # s6-overlay v3 init system
+  /init rix,
+  /command/** rix,
+  /package/** rix,
+
+  # s6-overlay runtime and service files
+  /run/** rwkix,
+  /run/s6/** rwkix,
+  /run/s6-rc/** rwkix,
+
+  # s6-overlay v3 service structure
+  /etc/s6-overlay/** rix,
+
+  # Legacy s6 paths (for compatibility)
+  /etc/s6/** rix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+
+  # Shell and utilities for s6 scripts
   /bin/** ix,
+  /sbin/** ix,
   /usr/bin/** ix,
-  /run/{s6,s6-rc*,service}/** mrwklix,
-  /package/** mrwklix,
-  /command/** mrwklix,
-  /{,var/}run/{s6,s6-rc*,service}/** mrwklix,
+  /usr/sbin/** ix,
 
-  # Bashio
+  # Bashio library
   /usr/lib/bashio/** ix,
-  /tmp/** mrwkl,
 
-  # Data access
-  /data/** rw,
+  # Binary execution
+  /usr/local/bin/** rmix,
 
-  # Programs
+  # RTL-SDR binaries
   /usr/bin/rtlamr mrix,
   /usr/bin/rtl_tcp mrix,
   /usr/bin/rtl_* mrix,
-  /usr/bin/rtlamr-ws mrix,
-  /usr/bin/curl mrix,
-  /usr/bin/jq mrix,
-  /usr/bin/yq mrix,
 
-  # Libraries
-  /usr/lib/** rm,
+  # Data directory access
+  /data/** rw,
+
+  # Config and runtime files
+  /config/** r,
+  /tmp/** rwk,
+
+  # System libraries and files
   /lib/** rm,
+  /usr/lib/** rm,
+  /etc/passwd r,
+  /etc/group r,
+  /etc/hosts r,
+  /etc/resolv.conf r,
+  /etc/ssl/** r,
+  /etc/localtime r,
+
+  # Proc filesystem
+  /proc/** r,
+  /proc/sys/net/** r,
+
+  # Dev filesystem
+  /dev/null rw,
+  /dev/zero r,
+  /dev/urandom r,
+  /dev/random r,
+  /dev/tty rw,
+  /dev/console rw,
+  /dev/pts/* rw,
 
   # USB device access for RTL-SDR
   /dev/bus/usb/** rw,
@@ -52,24 +103,4 @@ profile rtlamr_ws flags=(attach_disconnected,mediate_deleted) {
   /sys/bus/usb/** r,
   /sys/class/usb_device/** r,
   /sys/devices/**/usb*/** r,
-
-  # Proc filesystem
-  /proc/** r,
-  /proc/sys/net/** rw,
-
-  # Network
-  network inet stream,
-  network inet dgram,
-  network inet6 stream,
-  network inet6 dgram,
-  network netlink raw,
-
-  # Deny write access to sensitive areas
-  deny /proc/sys/** w,
-  deny /sys/** w,
-
-  # Misc
-  /etc/** r,
-  /run/** mrwkl,
-  /var/run/** mrwkl,
 }

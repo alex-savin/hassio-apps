@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2026-01-12
+
+### Changed
+
+- Updated base image from `ghcr.io/home-assistant/base:latest` to `ghcr.io/hassio-addons/base:19.0.0`
+- Migrated from s6-overlay v2 to v3 service structure
+- Moved binary location from `/usr/bin/ws-server` to `/usr/local/bin/ws-server`
+- Replaced `services.d` and `cont-init.d` with modern `s6-rc.d` structure
+- Consolidated configuration loading into the service run script
+- Updated AppArmor profile for s6-overlay v3 compatibility
+
 ## [1.0.0] - 2026-01-11
 
 ### Added

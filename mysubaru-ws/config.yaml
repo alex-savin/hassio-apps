@@ -1,6 +1,6 @@
 ---
 name: MySubaru Websocket
-version: "1.0.0"
+version: "1.0.1"
 slug: mysubaru-ws
 description: >-
   Exposes MySubaru vehicle state over websocket for Home Assistant integration.
