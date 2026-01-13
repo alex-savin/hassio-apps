@@ -1,0 +1,80 @@
+{
+  "configuration": {
+    "general": {
+      "name": "General Settings",
+      "description": "General configuration options for the add-on"
+    },
+    "sleep_for": {
+      "name": "Sleep Duration",
+      "description": "Number of seconds to wait between reading cycles"
+    },
+    "verbosity": {
+      "name": "Log Verbosity",
+      "description": "Logging level for the add-on"
+    },
+    "device_id": {
+      "name": "Device ID",
+      "description": "RTL-SDR device index (use '0' for the first device)"
+    },
+    "rtltcp_host": {
+      "name": "RTL-TCP Host",
+      "description": "Optional external rtl_tcp server address (host:port)"
+    },
+    "custom_parameters": {
+      "name": "Custom Parameters",
+      "description": "Advanced custom parameters for rtl_tcp and rtlamr"
+    },
+    "rtltcp": {
+      "name": "RTL-TCP Parameters",
+      "description": "Additional command-line arguments for rtl_tcp"
+    },
+    "rtlamr": {
+      "name": "RTLAMR Parameters",
+      "description": "Additional command-line arguments for rtlamr"
+    },
+    "meters": {
+      "name": "Meters",
+      "description": "List of utility meters to monitor"
+    },
+    "id": {
+      "name": "Meter ID",
+      "description": "Unique identifier of the meter (found on the meter or discovered via rtlamr)"
+    },
+    "protocol": {
+      "name": "Protocol",
+      "description": "Communication protocol used by the meter"
+    },
+    "name": {
+      "name": "Name",
+      "description": "Friendly name for the meter"
+    },
+    "format": {
+      "name": "Format",
+      "description": "Number format pattern (e.g., '######.###' for decimal placement)"
+    },
+    "unit_of_measurement": {
+      "name": "Unit of Measurement",
+      "description": "Unit for the meter readings (e.g., gal, ft³, kWh)"
+    },
+    "icon": {
+      "name": "Icon",
+      "description": "Material Design Icon for Home Assistant (e.g., mdi:water)"
+    },
+    "device_class": {
+      "name": "Device Class",
+      "description": "Home Assistant device class for the sensor"
+    },
+    "state_class": {
+      "name": "State Class",
+      "description": "Home Assistant state class for long-term statistics"
+    },
+    "expire_after": {
+      "name": "Expire After",
+      "description": "Seconds after which the sensor becomes unavailable if no update"
+    },
+    "force_update": {
+      "name": "Force Update",
+      "description": "Force state update even if the value hasn't changed"
+    }
+  }
+}

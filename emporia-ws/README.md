@@ -11,7 +11,6 @@ This Home Assistant add-on exposes Emporia Vue energy monitor data over a WebSoc
 - **Persistent authentication**: Credentials are stored and reused across restarts
 - **Device and channel data**: Provides both device-level and per-circuit usage information
 - **Outlet/EVSE control**: Toggle smart outlets and EV chargers
-- **Multi-language support**: Translated into 8 languages
 
 ## Installation
 
@@ -27,48 +26,19 @@ This Home Assistant add-on exposes Emporia Vue energy monitor data over a WebSoc
 | `log_level` | Logging verbosity (debug, info, warn, error) | `info` |
 | `poll_interval_seconds` | How often to poll Emporia API (in seconds) | `60` |
 
-## WebSocket API
+## Quick Start
 
-Connect to `ws://<addon-ip>:8080/ws`
+Connect to `ws://<addon-ip>:8080/ws` and authenticate:
 
-### Endpoints
-
-| Endpoint | Description |
-|----------|-------------|
-| `/ws` | WebSocket connection |
-| `/health` | Health check endpoint |
-
-### Messages
-
-**Hello** (server → client):
-```json
-{"type": "hello", "version": "1.0.0", "capabilities": ["usage", "control", "channels", "push"]}
-```
-
-**Authenticate** (client → server):
 ```json
 {"type": "authenticate", "username": "your-emporia-email", "password": "your-emporia-password"}
 ```
 
-**Auth Result** (server → client):
-```json
-{"type": "auth_result", "success": true}
-```
+## Documentation
 
-**Snapshot** (server → client, push):
-```json
-{
-  "type": "snapshot",
-  "timestamp": "2026-01-12T12:00:00Z",
-  "devices": [...],
-  "usage": {...}
-}
-```
-
-**Control** (client → server):
-```json
-{"type": "control", "device_gid": 12345, "outlet_on": true}
-```
+- [Full Documentation](DOCS.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Changelog](CHANGELOG.md)
 
 ## Building
 
@@ -82,8 +52,6 @@ BUILD_IMAGE=1 TARGETARCH=amd64 ./build.sh
 
 ## Support
 
-- [Documentation](docs/websocket-addon.md)
-- [Changelog](CHANGELOG.md)
 - [Report an issue](https://github.com/alex-savin/hassio-addon-emporia-vue-ws/issues)
 
 [releases-shield]: https://img.shields.io/github/v/release/alex-savin/hassio-addon-emporia-vue-ws

@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Protokollierungsstufe
+    description: >-
+      Detailgrad der Protokollierung für das Add-on
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Abfrageintervall
+    description: >-
+      Wie oft (in Sekunden) die Emporia-API nach neuen
+      Daten abgefragt werden soll.
+network:
+  8080/tcp: WebSocket- und Health-Endpunkte

@@ -1,0 +1,80 @@
+{
+  "configuration": {
+    "general": {
+      "name": "Configuración General",
+      "description": "Opciones de configuración general del complemento"
+    },
+    "sleep_for": {
+      "name": "Duración de Espera",
+      "description": "Número de segundos a esperar entre ciclos de lectura"
+    },
+    "verbosity": {
+      "name": "Nivel de Registro",
+      "description": "Nivel de registro de eventos del complemento"
+    },
+    "device_id": {
+      "name": "ID del Dispositivo",
+      "description": "Índice del dispositivo RTL-SDR (use '0' para el primer dispositivo)"
+    },
+    "rtltcp_host": {
+      "name": "Host RTL-TCP",
+      "description": "Dirección opcional del servidor rtl_tcp externo (host:puerto)"
+    },
+    "custom_parameters": {
+      "name": "Parámetros Personalizados",
+      "description": "Parámetros personalizados avanzados para rtl_tcp y rtlamr"
+    },
+    "rtltcp": {
+      "name": "Parámetros RTL-TCP",
+      "description": "Argumentos adicionales de línea de comandos para rtl_tcp"
+    },
+    "rtlamr": {
+      "name": "Parámetros RTLAMR",
+      "description": "Argumentos adicionales de línea de comandos para rtlamr"
+    },
+    "meters": {
+      "name": "Medidores",
+      "description": "Lista de medidores de servicios públicos a monitorear"
+    },
+    "id": {
+      "name": "ID del Medidor",
+      "description": "Identificador único del medidor (se encuentra en el medidor o se descubre mediante rtlamr)"
+    },
+    "protocol": {
+      "name": "Protocolo",
+      "description": "Protocolo de comunicación utilizado por el medidor"
+    },
+    "name": {
+      "name": "Nombre",
+      "description": "Nombre descriptivo para el medidor"
+    },
+    "format": {
+      "name": "Formato",
+      "description": "Patrón de formato numérico (ej., '######.###' para colocación decimal)"
+    },
+    "unit_of_measurement": {
+      "name": "Unidad de Medida",
+      "description": "Unidad para las lecturas del medidor (ej., gal, ft³, kWh)"
+    },
+    "icon": {
+      "name": "Icono",
+      "description": "Icono de Material Design para Home Assistant (ej., mdi:water)"
+    },
+    "device_class": {
+      "name": "Clase de Dispositivo",
+      "description": "Clase de dispositivo de Home Assistant para el sensor"
+    },
+    "state_class": {
+      "name": "Clase de Estado",
+      "description": "Clase de estado de Home Assistant para estadísticas a largo plazo"
+    },
+    "expire_after": {
+      "name": "Expirar Después",
+      "description": "Segundos después de los cuales el sensor se vuelve no disponible si no hay actualización"
+    },
+    "force_update": {
+      "name": "Forzar Actualización",
+      "description": "Forzar actualización de estado aunque el valor no haya cambiado"
+    }
+  }
+}

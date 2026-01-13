@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Рівень логування
+    description: >-
+      Рівень деталізації логів для сервера UPS Monitor.
+  poll_interval_seconds:
+    name: Інтервал опитування
+    description: >-
+      Як часто (у секундах) опитувати пристрої ДБЖ
+      для отримання оновлень статусу.

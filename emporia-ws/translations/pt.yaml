@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Nível de registo
+    description: >-
+      Nível de detalhe do registo para o complemento
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervalo de consulta
+    description: >-
+      Com que frequência (em segundos) consultar a API
+      da Emporia para obter novos dados.
+network:
+  8080/tcp: Pontos de acesso WebSocket e de saúde

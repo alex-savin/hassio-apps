@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Protokollebene
+    description: >-
+      Die Protokoll-Ausführlichkeitsstufe für den UPS Monitor-Server.
+  poll_interval_seconds:
+    name: Abfrageintervall
+    description: >-
+      Wie oft (in Sekunden) USV-Geräte auf Statusaktualisierungen
+      abgefragt werden sollen.

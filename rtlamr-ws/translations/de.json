@@ -1,0 +1,80 @@
+{
+  "configuration": {
+    "general": {
+      "name": "Allgemeine Einstellungen",
+      "description": "Allgemeine Konfigurationsoptionen für das Add-on"
+    },
+    "sleep_for": {
+      "name": "Wartezeit",
+      "description": "Anzahl der Sekunden zwischen den Lesezyklen"
+    },
+    "verbosity": {
+      "name": "Protokollierungsstufe",
+      "description": "Protokollierungsstufe für das Add-on"
+    },
+    "device_id": {
+      "name": "Geräte-ID",
+      "description": "RTL-SDR Geräteindex (verwenden Sie '0' für das erste Gerät)"
+    },
+    "rtltcp_host": {
+      "name": "RTL-TCP Host",
+      "description": "Optionale externe rtl_tcp Serveradresse (Host:Port)"
+    },
+    "custom_parameters": {
+      "name": "Benutzerdefinierte Parameter",
+      "description": "Erweiterte benutzerdefinierte Parameter für rtl_tcp und rtlamr"
+    },
+    "rtltcp": {
+      "name": "RTL-TCP Parameter",
+      "description": "Zusätzliche Befehlszeilenargumente für rtl_tcp"
+    },
+    "rtlamr": {
+      "name": "RTLAMR Parameter",
+      "description": "Zusätzliche Befehlszeilenargumente für rtlamr"
+    },
+    "meters": {
+      "name": "Zähler",
+      "description": "Liste der zu überwachenden Versorgungszähler"
+    },
+    "id": {
+      "name": "Zähler-ID",
+      "description": "Eindeutige Kennung des Zählers (auf dem Zähler zu finden oder über rtlamr ermittelt)"
+    },
+    "protocol": {
+      "name": "Protokoll",
+      "description": "Vom Zähler verwendetes Kommunikationsprotokoll"
+    },
+    "name": {
+      "name": "Name",
+      "description": "Benutzerfreundlicher Name für den Zähler"
+    },
+    "format": {
+      "name": "Format",
+      "description": "Zahlenformatmuster (z.B. '######.###' für Dezimalplatzierung)"
+    },
+    "unit_of_measurement": {
+      "name": "Maßeinheit",
+      "description": "Einheit für die Zählerablesungen (z.B. gal, ft³, kWh)"
+    },
+    "icon": {
+      "name": "Symbol",
+      "description": "Material Design Symbol für Home Assistant (z.B. mdi:water)"
+    },
+    "device_class": {
+      "name": "Geräteklasse",
+      "description": "Home Assistant Geräteklasse für den Sensor"
+    },
+    "state_class": {
+      "name": "Zustandsklasse",
+      "description": "Home Assistant Zustandsklasse für Langzeitstatistiken"
+    },
+    "expire_after": {
+      "name": "Ablauf Nach",
+      "description": "Sekunden, nach denen der Sensor ohne Aktualisierung nicht verfügbar wird"
+    },
+    "force_update": {
+      "name": "Aktualisierung Erzwingen",
+      "description": "Zustandsaktualisierung erzwingen, auch wenn sich der Wert nicht geändert hat"
+    }
+  }
+}

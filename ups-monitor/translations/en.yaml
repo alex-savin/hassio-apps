@@ -1,0 +1,10 @@
+---
+configuration:
+  log_level:
+    name: Log Level
+    description: >-
+      The log verbosity level for the UPS Monitor server.
+  poll_interval_seconds:
+    name: Poll Interval
+    description: >-
+      How often (in seconds) to poll UPS devices for status updates.

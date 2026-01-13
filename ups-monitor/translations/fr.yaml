@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Niveau de journalisation
+    description: >-
+      Le niveau de verbosité des journaux pour le serveur UPS Monitor.
+  poll_interval_seconds:
+    name: Intervalle de sondage
+    description: >-
+      Fréquence (en secondes) d'interrogation des périphériques UPS
+      pour les mises à jour de statut.

@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Logniveau
+    description: >-
+      Detailniveau van logboekregistratie voor de add-on
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Poll-interval
+    description: >-
+      Hoe vaak (in seconden) de Emporia API moet worden
+      geraadpleegd voor nieuwe gegevens.
+network:
+  8080/tcp: WebSocket- en health-eindpunten

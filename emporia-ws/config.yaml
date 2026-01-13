@@ -13,9 +13,9 @@ init: false
 ports:
   8080/tcp: null
 ports_description:
-  8080/tcp: Websocket and health endpoints
+  8080/tcp: Websocket and health endpoints (host port configurable)
 schema:
-  log_level: str?
+  log_level: "list(debug|info|warn|error)"
   poll_interval_seconds: int?
 options:
   log_level: info

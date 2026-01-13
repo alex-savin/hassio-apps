@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Poziom logowania
+    description: >-
+      Poziom szczegółowości logów dla dodatku
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Interwał odpytywania
+    description: >-
+      Jak często (w sekundach) odpytywać API Emporia
+      o nowe dane.
+network:
+  8080/tcp: Punkty końcowe WebSocket i health

@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Niveau de journalisation
+    description: >-
+      Niveau de détail des journaux pour l'extension
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervalle d'interrogation
+    description: >-
+      Fréquence (en secondes) d'interrogation de l'API
+      Emporia pour obtenir de nouvelles données.
+network:
+  8080/tcp: Points d'accès WebSocket et de santé

@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Logniveau
+    description: >-
+      Het logniveau voor de UPS Monitor-server.
+  poll_interval_seconds:
+    name: Poll-interval
+    description: >-
+      Hoe vaak (in seconden) UPS-apparaten moeten worden gepolled
+      voor statusupdates.

@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Nivel de registro
+    description: >-
+      El nivel de detalle del registro para el servidor UPS Monitor.
+  poll_interval_seconds:
+    name: Intervalo de sondeo
+    description: >-
+      Con qué frecuencia (en segundos) consultar los dispositivos UPS
+      para obtener actualizaciones de estado.

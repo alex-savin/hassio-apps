@@ -1,0 +1,10 @@
+---
+configuration:
+  log_level:
+    name: 日志级别
+    description: >-
+      UPS Monitor 服务器的日志详细程度。
+  poll_interval_seconds:
+    name: 轮询间隔
+    description: >-
+      轮询 UPS 设备以获取状态更新的频率（以秒为单位）。

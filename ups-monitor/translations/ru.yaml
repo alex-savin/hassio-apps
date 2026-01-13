@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Уровень логирования
+    description: >-
+      Уровень детализации логов для сервера UPS Monitor.
+  poll_interval_seconds:
+    name: Интервал опроса
+    description: >-
+      Как часто (в секундах) опрашивать устройства ИБП
+      для получения обновлений статуса.

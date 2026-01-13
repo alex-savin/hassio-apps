@@ -1,5 +1,5 @@
 ---
-name: RTL-SDR Automatic Meter Reading (AMR) Receiver
+name: RTL-SDR Automatic Meter Reading Receiver
 version: 1.0.1
 slug: rtlamr_ws
 url: https://github.com/alex-savin/hassio-addon-rtlamr-ws
@@ -7,6 +7,7 @@ description: RTL-SDR Automatic Meter Reading Bridge
 arch:
   - amd64
   - aarch64
+startup: services
 init: false
 uart: true
 udev: true
@@ -17,24 +18,10 @@ ports:
   8080/tcp: 8080
 ports_description:
   8080/tcp: Websocket and health endpoints (host port configurable)
-options:
-  general:
-    sleep_for: 60
-    verbosity: info
-    device_id: "0"
-  custom_parameters: {}
-  meters:
-    - id: 22222222
-      protocol: r900
-      name: water
-      format: "######.###"
-      unit_of_measurement: "gal"
-      device_class: water
-      state_class: total_increasing
 schema:
   general:
     sleep_for: "int?"
-    verbosity: "list(debug|info|warning|critical|none)?"
+    verbosity: "list(debug|info|warn|error)"
     device_id: "str?"
     rtltcp_host: match(([\w\d\.]+):(\d+))?
   custom_parameters:
@@ -51,4 +38,20 @@ schema:
       state_class: list(measurement|total|total_increasing)?
       expire_after: int?
       force_update: bool?
+options:
+  general:
+    sleep_for: 60
+    verbosity: info
+    device_id: "0"
+  custom_parameters: {}
+  meters:
+    - id: 22222222
+      protocol: r900
+      name: water
+      format: "######.###"
+      unit_of_measurement: "gal"
+      device_class: water
+      state_class: total_increasing
+environment:
+  WS_LISTEN_ADDR: ":8080"
 image: "ghcr.io/alex-savin/{arch}-addon-rtlamr-ws"

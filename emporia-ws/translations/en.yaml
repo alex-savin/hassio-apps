@@ -1,0 +1,10 @@
+---
+configuration:
+  log_level:
+    name: Log Level
+    description: Logging verbosity for the add-on (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Poll Interval
+    description: How often (in seconds) to poll the Emporia API for new data.
+network:
+  8080/tcp: WebSocket and health endpoints

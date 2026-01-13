@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Livello di log
+    description: >-
+      Livello di dettaglio dei log per l'add-on
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervallo di polling
+    description: >-
+      Frequenza (in secondi) con cui interrogare l'API
+      Emporia per nuovi dati.
+network:
+  8080/tcp: Endpoint WebSocket e di stato

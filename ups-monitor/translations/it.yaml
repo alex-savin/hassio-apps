@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Livello di log
+    description: >-
+      Il livello di verbosità dei log per il server UPS Monitor.
+  poll_interval_seconds:
+    name: Intervallo di polling
+    description: >-
+      Con quale frequenza (in secondi) interrogare i dispositivi UPS
+      per gli aggiornamenti di stato.

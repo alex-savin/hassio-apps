@@ -1,0 +1,80 @@
+{
+  "configuration": {
+    "general": {
+      "name": "Paramètres Généraux",
+      "description": "Options de configuration générale du module complémentaire"
+    },
+    "sleep_for": {
+      "name": "Durée de Veille",
+      "description": "Nombre de secondes à attendre entre les cycles de lecture"
+    },
+    "verbosity": {
+      "name": "Niveau de Journalisation",
+      "description": "Niveau de journalisation du module complémentaire"
+    },
+    "device_id": {
+      "name": "ID de l'Appareil",
+      "description": "Index de l'appareil RTL-SDR (utilisez '0' pour le premier appareil)"
+    },
+    "rtltcp_host": {
+      "name": "Hôte RTL-TCP",
+      "description": "Adresse optionnelle du serveur rtl_tcp externe (hôte:port)"
+    },
+    "custom_parameters": {
+      "name": "Paramètres Personnalisés",
+      "description": "Paramètres personnalisés avancés pour rtl_tcp et rtlamr"
+    },
+    "rtltcp": {
+      "name": "Paramètres RTL-TCP",
+      "description": "Arguments de ligne de commande supplémentaires pour rtl_tcp"
+    },
+    "rtlamr": {
+      "name": "Paramètres RTLAMR",
+      "description": "Arguments de ligne de commande supplémentaires pour rtlamr"
+    },
+    "meters": {
+      "name": "Compteurs",
+      "description": "Liste des compteurs de services publics à surveiller"
+    },
+    "id": {
+      "name": "ID du Compteur",
+      "description": "Identifiant unique du compteur (trouvé sur le compteur ou découvert via rtlamr)"
+    },
+    "protocol": {
+      "name": "Protocole",
+      "description": "Protocole de communication utilisé par le compteur"
+    },
+    "name": {
+      "name": "Nom",
+      "description": "Nom convivial pour le compteur"
+    },
+    "format": {
+      "name": "Format",
+      "description": "Modèle de format numérique (ex., '######.###' pour le placement décimal)"
+    },
+    "unit_of_measurement": {
+      "name": "Unité de Mesure",
+      "description": "Unité pour les relevés du compteur (ex., gal, ft³, kWh)"
+    },
+    "icon": {
+      "name": "Icône",
+      "description": "Icône Material Design pour Home Assistant (ex., mdi:water)"
+    },
+    "device_class": {
+      "name": "Classe d'Appareil",
+      "description": "Classe d'appareil Home Assistant pour le capteur"
+    },
+    "state_class": {
+      "name": "Classe d'État",
+      "description": "Classe d'état Home Assistant pour les statistiques à long terme"
+    },
+    "expire_after": {
+      "name": "Expirer Après",
+      "description": "Secondes après lesquelles le capteur devient indisponible sans mise à jour"
+    },
+    "force_update": {
+      "name": "Forcer la Mise à Jour",
+      "description": "Forcer la mise à jour de l'état même si la valeur n'a pas changé"
+    }
+  }
+}
