@@ -1,9 +1,19 @@
 # Emporia Vue Websocket Add-on
 
-[![GitHub Release][releases-shield]][releases]
-[![License][license-shield]](LICENSE)
+[![Add add-on to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falex-savin%2Fhassio-apps)
+[![GitHub Release](https://img.shields.io/github/v/release/alex-savin/hassio-addon-emporia-vue-ws)](https://github.com/alex-savin/hassio-addon-emporia-vue-ws/releases)
+[![License](https://img.shields.io/github/license/alex-savin/hassio-addon-emporia-vue-ws)](LICENSE)
 
 This Home Assistant add-on exposes Emporia Vue energy monitor data over a WebSocket interface.
+
+## Requirements
+
+This add-on requires the [Emporia Vue Custom Integration](https://github.com/alex-savin/hassio-integration-emporia-vue) to be installed in Home Assistant. The add-on acts as a websocket bridge to the Emporia API, while the integration provides the Home Assistant entities (sensors for energy usage, power consumption per circuit, etc.) that consume the data.
+
+**Installation order:**
+1. Install this add-on and start it
+2. Install the [Emporia Vue Custom Integration](https://github.com/alex-savin/hassio-integration-emporia-vue) via HACS or manually
+3. Configure the integration to connect to this add-on's websocket endpoint
 
 ## Features
 
@@ -25,8 +35,6 @@ This Home Assistant add-on exposes Emporia Vue energy monitor data over a WebSoc
 |--------|-------------|---------|
 | `log_level` | Logging verbosity (debug, info, warn, error) | `info` |
 | `poll_interval_seconds` | How often to poll Emporia API (in seconds) | `60` |
-
-## Quick Start
 
 Connect to `ws://<addon-ip>:8080/ws` and authenticate:
 
@@ -53,8 +61,4 @@ BUILD_IMAGE=1 TARGETARCH=amd64 ./build.sh
 ## Support
 
 - [Report an issue](https://github.com/alex-savin/hassio-addon-emporia-vue-ws/issues)
-
-[releases-shield]: https://img.shields.io/github/v/release/alex-savin/hassio-addon-emporia-vue-ws
-[releases]: https://github.com/alex-savin/hassio-addon-emporia-vue-ws/releases
-[license-shield]: https://img.shields.io/github/license/alex-savin/hassio-addon-emporia-vue-ws
 

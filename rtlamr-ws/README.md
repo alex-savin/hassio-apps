@@ -1,10 +1,25 @@
 # RTLAMR WebSocket Add-on for Home Assistant
 
+[![Add add-on to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falex-savin%2Fhassio-apps)
 [![CI](https://github.com/alex-savin/hassio-addon-rtlamr-ws/actions/workflows/ci.yaml/badge.svg)](https://github.com/alex-savin/hassio-addon-rtlamr-ws/actions/workflows/ci.yaml)
 [![GitHub Release](https://img.shields.io/github/v/release/alex-savin/hassio-addon-rtlamr-ws)](https://github.com/alex-savin/hassio-addon-rtlamr-ws/releases)
 [![License](https://img.shields.io/github/license/alex-savin/hassio-addon-rtlamr-ws)](LICENSE)
 
 A Home Assistant add-on that reads utility meters (water, gas, electric) using an RTL-SDR dongle and broadcasts readings over WebSocket. Built in Go for high performance and low resource usage.
+
+## Requirements
+
+This add-on requires the [RTLAMR Custom Integration](https://github.com/alex-savin/hassio-integration-rtlamr) to be installed in Home Assistant. The add-on acts as a websocket bridge that decodes AMR signals from your RTL-SDR dongle, while the integration provides the Home Assistant entities (sensors for water, gas, electric meter readings) that consume the data.
+
+**Installation order:**
+1. Install this add-on and start it
+2. Install the [RTLAMR Custom Integration](https://github.com/alex-savin/hassio-integration-rtlamr) via HACS or manually
+3. Configure the integration to connect to this add-on's websocket endpoint
+
+**Hardware requirements:**
+- Home Assistant OS or Supervised installation
+- RTL-SDR USB dongle (e.g., RTL2832U-based)
+- Compatible utility meters using AMR technology
 
 ## Features
 
@@ -17,22 +32,14 @@ A Home Assistant add-on that reads utility meters (water, gas, electric) using a
 - ❤️ **Health Monitoring** - Built-in health check endpoint for reliability
 - 🏗️ **Multi-Architecture** - Supports amd64 and aarch64 (ARM64)
 
-## Requirements
-
-- Home Assistant OS or Supervised installation
-- RTL-SDR USB dongle (e.g., RTL2832U-based)
-- Compatible utility meters using AMR technology
-
-## Quick Start
-
-### Installation
+## Installation
 
 1. Navigate to **Settings** → **Add-ons** → **Add-on Store**
 2. Click the three dots (⋮) → **Repositories**
 3. Add: `https://github.com/alex-savin/hassio-apps`
 4. Find "RTLAMR WebSocket" and click **Install**
 
-### Basic Configuration
+## Configuration
 
 ```yaml
 general:

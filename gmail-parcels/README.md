@@ -1,5 +1,9 @@
 # Go Gmail Parcels (v2) - Home Assistant Add-on
 
+[![Add add-on to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falex-savin%2Fhassio-apps)
+[![GitHub Release](https://img.shields.io/github/v/release/alex-savin/go-gmail-parcels)](https://github.com/alex-savin/go-gmail-parcels/releases)
+[![License](https://img.shields.io/github/license/alex-savin/go-gmail-parcels)](LICENSE)
+
 A hybrid Go/Python Home Assistant Add-on that monitors Gmail for parcel delivery notifications using a local NER (Named Entity Recognition) model.
 
 ## Features
