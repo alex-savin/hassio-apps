@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Log Level
+    description: The verbosity of logging (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Poll Interval
+    description: How often to poll vehicle status in seconds.
+  location_poll_interval_seconds:
+    name: Location Poll Interval
+    description: How often to poll vehicle location in seconds.

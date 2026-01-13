@@ -1,0 +1,13 @@
+---
+configuration:
+  log_level:
+    name: Protokollierungsstufe
+    description: >-
+      Die Ausführlichkeit der Protokollierung
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Abfrageintervall
+    description: Wie oft der Fahrzeugstatus in Sekunden abgefragt wird.
+  location_poll_interval_seconds:
+    name: Standort-Abfrageintervall
+    description: Wie oft der Fahrzeugstandort in Sekunden abgefragt wird.

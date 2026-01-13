@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: Logniveau
+    description: De uitgebreidheid van de logging (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Poll-interval
+    description: Hoe vaak de voertuigstatus wordt opgevraagd in seconden.
+  location_poll_interval_seconds:
+    name: Locatie poll-interval
+    description: Hoe vaak de voertuiglocatie wordt opgevraagd in seconden.

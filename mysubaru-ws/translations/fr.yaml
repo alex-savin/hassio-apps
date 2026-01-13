@@ -1,0 +1,16 @@
+---
+configuration:
+  log_level:
+    name: Niveau de journalisation
+    description: >-
+      Le niveau de détail de la journalisation
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervalle de sondage
+    description: >-
+      À quelle fréquence interroger l'état du véhicule en secondes.
+  location_poll_interval_seconds:
+    name: Intervalle de sondage de localisation
+    description: >-
+      À quelle fréquence interroger la localisation du véhicule
+      en secondes.

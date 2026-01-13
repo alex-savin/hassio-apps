@@ -1,0 +1,13 @@
+---
+configuration:
+  log_level:
+    name: Nível de registo
+    description: O nível de detalhe do registo (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervalo de sondagem
+    description: >-
+      Com que frequência sondar o estado do veículo em segundos.
+  location_poll_interval_seconds:
+    name: Intervalo de sondagem de localização
+    description: >-
+      Com que frequência sondar a localização do veículo em segundos.

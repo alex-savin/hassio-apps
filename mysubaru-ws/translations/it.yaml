@@ -1,0 +1,13 @@
+---
+configuration:
+  log_level:
+    name: Livello di registrazione
+    description: >-
+      Il livello di dettaglio della registrazione
+      (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervallo di polling
+    description: Ogni quanto interrogare lo stato del veicolo in secondi.
+  location_poll_interval_seconds:
+    name: Intervallo di polling posizione
+    description: Ogni quanto interrogare la posizione del veicolo in secondi.

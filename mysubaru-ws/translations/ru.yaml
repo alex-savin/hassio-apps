@@ -1,0 +1,12 @@
+---
+configuration:
+  log_level:
+    name: Уровень журналирования
+    description: Детализация журналирования (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Интервал опроса
+    description: Как часто опрашивать статус автомобиля в секундах.
+  location_poll_interval_seconds:
+    name: Интервал опроса местоположения
+    description: >-
+      Как часто опрашивать местоположение автомобиля в секундах.

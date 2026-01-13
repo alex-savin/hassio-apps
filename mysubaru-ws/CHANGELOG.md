@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2026-01-13
+
+### Fixed
+
+- Added automatic session re-authentication when `InvalidToken` errors occur during polling
+- Location polling now detects session expiration and recovers automatically
+- Vehicle status polling now handles session expiration gracefully
+
 ## [1.0.1] - 2026-01-12
 
 ### Changed

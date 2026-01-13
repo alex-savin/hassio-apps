@@ -1,0 +1,11 @@
+---
+configuration:
+  log_level:
+    name: 日志级别
+    description: 日志的详细程度（debug、info、warn、error）。
+  poll_interval_seconds:
+    name: 轮询间隔
+    description: 轮询车辆状态的频率（秒）。
+  location_poll_interval_seconds:
+    name: 位置轮询间隔
+    description: 轮询车辆位置的频率（秒）。

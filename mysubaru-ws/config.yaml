@@ -1,6 +1,6 @@
 ---
 name: MySubaru Websocket
-version: "1.0.1"
+version: "1.0.2"
 slug: mysubaru-ws
 description: >-
   Exposes MySubaru vehicle state over websocket for Home Assistant integration.
@@ -14,7 +14,7 @@ ports:
 ports_description:
   8080/tcp: Websocket and health endpoints (host port configurable)
 schema:
-  log_level: str?
+  log_level: "list(debug|info|warn|error)"
   poll_interval_seconds: int?
   location_poll_interval_seconds: int?
 options:
