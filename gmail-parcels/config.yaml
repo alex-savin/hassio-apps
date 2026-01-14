@@ -1,18 +1,23 @@
 ---
 name: "Gmail Parcels"
 version: "0.0.2"
-stage: experimental
-slug: "gmail-parcels"
+slug: "gmail_parcels"
 description: "Track parcels from Gmail emails using AI"
-url: "https://github.com/alex-savin/go-gmail-parcels"
+url: "https://github.com/alex-savin/hassio-apps/gmail-parcels"
+arch:
+  - amd64
 startup: application
 boot: auto
 init: false
-arch:
-  - amd64
+ports:
+  8080/tcp: 8080
+ports_description:
+  8080/tcp: Websocket and health endpoints (host port configurable)
 options:
+  log_level: info
   accounts: []
 schema:
+  log_level: "list(debug|info|warn|error)"
   accounts:
     - email: email
       credentials_file: str
@@ -22,6 +27,6 @@ schema:
       subscription_id: str
       carriers:
         - str
-ports:
-  8080/tcp: 8080
+environment:
+  WS_LISTEN_ADDR: ":8080"
 image: "ghcr.io/alex-savin/gmail-parcels-addon-{arch}"
