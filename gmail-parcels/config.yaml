@@ -1,6 +1,7 @@
 ---
 name: "Gmail Parcels"
-version: "0.0.1"
+version: "0.0.2"
+stage: experimental
 slug: "gmail-parcels"
 description: "Track parcels from Gmail emails using AI"
 url: "https://github.com/alex-savin/go-gmail-parcels"
