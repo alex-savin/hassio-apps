@@ -55,6 +55,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `custom_parameters.rtlamr` - Additional rtlamr arguments
 - `meters` - List of meter configurations with protocol, format, and Home Assistant attributes
 
-[Unreleased]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/compare/1.0.1...HEAD
-[1.0.1]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/compare/1.0.0...1.0.1
-[1.0.0]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/releases/tag/1.0.0
+[Unreleased]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.0.0...1.0.1
+[1.0.0]: https://github.com/alex-savin/hassio-app-rtlamr-ws/releases/tag/1.0.0

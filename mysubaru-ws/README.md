@@ -1,33 +1,23 @@
-# MySubaru Websocket Add-on
+# MySubaru Websocket App
 
-[![Add add-on to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falex-savin%2Fhassio-apps)
-[![GitHub Release](https://img.shields.io/github/v/release/alex-savin/hassio-addon-mysubaru-ws)](https://github.com/alex-savin/hassio-addon-mysubaru-ws/releases)
-[![License](https://img.shields.io/github/license/alex-savin/hassio-addon-mysubaru-ws)](LICENSE)
-
-Home Assistant add-on that exposes MySubaru vehicle state over a websocket for integration with Home Assistant.
-
-## Requirements
-
-This add-on requires the [MySubaru Custom Integration](https://github.com/alex-savin/hassio-integration-mysubaru) to be installed in Home Assistant. The add-on acts as a websocket bridge to the MySubaru API, while the integration provides the Home Assistant entities (sensors, device trackers, etc.) that consume the data.
-
-**Installation order:**
-1. Install this add-on and start it
-2. Install the [MySubaru Custom Integration](https://github.com/alex-savin/hassio-integration-mysubaru) via HACS or manually
-3. Configure the integration to connect to this add-on's websocket endpoint
+Home Assistant app that exposes MySubaru vehicle state over a websocket for integration with Home Assistant.
 
 ## Features
 
 - Real-time vehicle status via websocket
 - Configurable polling intervals for vehicle and location data
+- Full vehicle control: lock/unlock, remote start/stop, horn, lights, EV charge
+- Safety alerts: geofence, speed fence, curfew with activate/deactivate controls
+- Valet mode management
+- Trip tracking: start/stop logging, retrieve history
+- POI/destination management: send to vehicle nav, manage favorites
+- EV charge schedule management
+- Climate preset management
+- Vehicle information: recalls, warning lights, model info
+- Roadside assistance requests
+- Cancel any pending command
 - AppArmor security profile for hardened container security
 - s6-overlay service management
-
-## Installation
-
-1. Add this repository to your Home Assistant add-on store
-2. Install the "MySubaru Websocket" add-on
-3. Start the add-on
-4. Configure the integration to connect to `ws://<ha-host>:8080/ws`
 
 ## Configuration
 
@@ -39,16 +29,31 @@ This add-on requires the [MySubaru Custom Integration](https://github.com/alex-s
 
 ## Endpoints
 
+### Authentication & Configuration
+
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/health` | GET | Readiness check |
-| `/ws` | WS | Vehicle status stream |
+| `/healthz` | GET | Liveness check |
+| `/ws` | GET | WebSocket vehicle status stream |
 | `/auth/config` | POST | Set credentials |
 | `/auth/status` | GET | Check auth state |
 | `/auth/send_code` | POST | Request verification code |
 | `/auth/verify` | POST | Verify code (`?code=123456`) |
+| `/auth/refresh_vehicles` | POST | Force refresh vehicle list |
 
-The add-on listens on internal port `8080`. Map any host port in Supervisor, then configure your integration with `ws://<ha-host>:<host_port>/ws`.
+### Vehicle Commands (`POST /vehicle/{vin}/{action}`)
+
+Lock/Unlock, Remote Start/Stop, Horn, Lights, EV Charge, Valet Mode, GeoFence, Speed Fence, Curfew, Trip Log, POI, Climate Presets, Roadside Assistance, and Cancel operations.
+
+### Vehicle Data (`GET /vehicle/{vin}/{action}`)
+
+Trips, Valet Status/Settings, GeoFence/Speed Fence/Curfew Settings, EV Charge Settings, Recalls, Warning Lights, Roadside Assistance Info, Favorite POIs, Model Info.
+
+See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for the complete endpoint reference.
+
+## Port Configuration
+
+The app listens on internal port `8080`. Map any host port in Supervisor, then configure your integration with `ws://<ha-host>:<host_port>/ws`.
 
 ## Documentation
 

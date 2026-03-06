@@ -128,6 +128,6 @@ The add-on requires USB, UART, and udev access which are configured automaticall
 
 ## Support
 
-- [Documentation](https://github.com/alex-savin/hassio-addon-rtlamr-ws/tree/main/docs)
-- [Report Issues](https://github.com/alex-savin/hassio-addon-rtlamr-ws/issues)
-- [Discussions](https://github.com/alex-savin/hassio-addon-rtlamr-ws/discussions)
+- [Documentation](https://github.com/alex-savin/hassio-app-rtlamr-ws/tree/main/docs)
+- [Report Issues](https://github.com/alex-savin/hassio-app-rtlamr-ws/issues)
+- [Discussions](https://github.com/alex-savin/hassio-app-rtlamr-ws/discussions)

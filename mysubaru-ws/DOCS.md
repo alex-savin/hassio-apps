@@ -31,9 +31,10 @@ Hit `http://localhost:8080/health` for readiness and `ws://localhost:8080/ws` fo
 ```
 ├── apparmor.txt                 # AppArmor security profile
 ├── build.sh                     # Build helper script
-├── config.yaml                  # Add-on configuration
+├── config.yaml                  # App configuration
 ├── Dockerfile                   # Multi-stage build
 ├── cmd/ws-server/main.go        # WebSocket server entry point
+├── docs/ARCHITECTURE.md         # Full API reference & architecture
 └── rootfs/
     └── etc/
         └── s6-overlay/
@@ -62,25 +63,25 @@ Hit `http://localhost:8080/health` for readiness and `ws://localhost:8080/ws` fo
 # Override arch/output
 GOARCH=arm64 OUTPUT=/tmp/ws-server ./build.sh
 
-# Drop the binary into add-on data for local runs: /data/ws-server
+# Drop the binary into app data for local runs: /data/ws-server
 ```
 
-## Building the add-on image
+## Building the app image
 
 ```bash
 # Build the image via the helper (example for amd64; uses arch-specific base)
-BUILD_IMAGE=1 TARGETARCH=amd64 IMAGE_TAG=local/mysubaru-ws-addon-amd64 ./build.sh
+BUILD_IMAGE=1 TARGETARCH=amd64 IMAGE_TAG=local/mysubaru-ws-app-amd64 ./build.sh
 
 # Or build manually (run from repo root)
 docker build \
 	--build-arg BUILD_FROM=ghcr.io/home-assistant/amd64-base:latest \
 	--build-arg TARGETARCH=amd64 \
 	-f Dockerfile \
-	-t local/mysubaru-ws-addon-amd64 \
+	-t local/mysubaru-ws-app-amd64 \
 	.
 ```
 
-Adjust `GOARCH`/`TARGETARCH` to `arm64` for aarch64 hosts (and `BUILD_FROM` to `ghcr.io/home-assistant/arm64-base:latest` if building manually). Tag images with the arch suffix (e.g., `local/mysubaru-ws-addon-arm64`) to match `image: local/mysubaru-ws-addon-{arch}`. If GHCR access is restricted, set `BUILD_FROM` to an accessible base image.
+Adjust `GOARCH`/`TARGETARCH` to `arm64` for aarch64 hosts (and `BUILD_FROM` to `ghcr.io/home-assistant/arm64-base:latest` if building manually). Tag images with the arch suffix (e.g., `local/mysubaru-ws-app-arm64`) to match `image: local/mysubaru-ws-app-{arch}`. If GHCR access is restricted, set `BUILD_FROM` to an accessible base image.
 
 ## Running the container locally (optional)
 
@@ -92,14 +93,14 @@ Example:
 docker run --rm -p 8080:8080 \
 	-e LOG_LEVEL=info \
 	-e POLL_INTERVAL_SECONDS=300 \
-	local/mysubaru-ws-addon-amd64
+	local/mysubaru-ws-app-amd64
 ```
 
 Provide credentials via the integration (or POST to `/auth/config`), same as in HA.
 
 ## Security
 
-This add-on includes an AppArmor profile (`apparmor.txt`) that restricts container capabilities:
+This app includes an AppArmor profile (`apparmor.txt`) that restricts container capabilities:
 
 - Allows network binding for the websocket server
 - Grants read/write access to `/config` for configuration

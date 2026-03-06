@@ -2,7 +2,7 @@
 name: RTL-SDR Automatic Meter Reading Receiver
 version: 1.0.1
 slug: rtlamr_ws
-url: https://github.com/alex-savin/hassio-addon-rtlamr-ws
+url: https://github.com/alex-savin/hassio-app-rtlamr-ws
 description: RTL-SDR Automatic Meter Reading Bridge
 arch:
   - amd64
@@ -54,4 +54,4 @@ options:
       state_class: total_increasing
 environment:
   WS_LISTEN_ADDR: ":8080"
-image: "ghcr.io/alex-savin/{arch}-addon-rtlamr-ws"
+image: "ghcr.io/alex-savin/{arch}-app-rtlamr-ws"

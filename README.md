@@ -11,6 +11,8 @@ A collection of Home Assistant add-ons for various integrations and services.
 | [MySubaru Websocket](mysubaru-ws/) | Exposes MySubaru vehicle state over websocket for Home Assistant integration | amd64, aarch64 |
 | [RTL-SDR AMR Receiver](rtlamr-ws/) | RTL-SDR Automatic Meter Reading Bridge | amd64, aarch64 |
 | [UPS Monitor](ups-monitor/) | Expose UPS statuses via go-ups for Home Assistant | amd64, aarch64 |
+| [Zigbee2MQTT Instance 01](zigbee2mqtt-01/) | Use your ZigBee devices without the vendor's bridge or gateway (Instance 01) | amd64, aarch64 |
+| [Zigbee2MQTT Instance 02](zigbee2mqtt-02/) | Use your ZigBee devices without the vendor's bridge or gateway (Instance 02) | amd64, aarch64 |
 
 ## Installation
 
@@ -27,6 +29,8 @@ Each add-on has its own documentation:
 - [MySubaru Websocket Docs](mysubaru-ws/DOCS.md)
 - [RTL-SDR AMR Receiver Docs](rtlamr-ws/DOCS.md)
 - [UPS Monitor Docs](ups-monitor/DOCS.md)
+- [Zigbee2MQTT Instance 01 Docs](zigbee2mqtt-01/DOCS.md)
+- [Zigbee2MQTT Instance 02 Docs](zigbee2mqtt-02/DOCS.md)
 
 ## Notes
 

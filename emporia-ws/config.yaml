@@ -22,4 +22,4 @@ options:
   poll_interval_seconds: 60
 environment:
   WS_LISTEN_ADDR: ":8080"
-image: "ghcr.io/alex-savin/{arch}-addon-emporia-vue-ws"
+image: "ghcr.io/alex-savin/{arch}-app-emporia-vue-ws"
