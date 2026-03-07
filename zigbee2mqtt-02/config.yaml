@@ -1,6 +1,6 @@
 ---
 name: Zigbee2MQTT Instance 02
-version: 2.9.1-1
+version: 2.9.1-2
 slug: zigbee2mqtt-02
 description: Use your ZigBee devices without the vendor's bridge or gateway (Instance 02)
 breaking_versions:
