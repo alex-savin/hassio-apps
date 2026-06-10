@@ -1,6 +1,6 @@
 ---
 name: MySubaru Websocket
-version: "1.0.2"
+version: "1.1.0"
 slug: mysubaru-ws
 description: >-
   Exposes MySubaru vehicle state over websocket for Home Assistant integration.
@@ -23,4 +23,4 @@ options:
   location_poll_interval_seconds: 300
 environment:
   WS_LISTEN_ADDR: ":8080"
-image: "ghcr.io/alex-savin/{arch}-addon-mysubaru-ws"
+image: "ghcr.io/alex-savin/{arch}-app-mysubaru-ws"
