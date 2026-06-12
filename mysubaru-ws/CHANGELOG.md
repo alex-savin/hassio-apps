@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-06-12
+
+### Changed
+
+- **Upgraded to go-mysubaru v2.0.0** (`github.com/alex-savin/go-mysubaru/v2`):
+  - All library calls are now context-aware; in-flight vehicle commands are
+    detached from the HTTP request so a disconnecting caller cannot abort them,
+    while read endpoints cancel with the request
+  - Session validity is cached library-side for 4 minutes after any successful
+    response, removing up to 3 MySubaru round-trips per command — remote
+    commands and polls issued in bursts respond noticeably faster
+  - HTML error pages from the MySubaru backend are now detected uniformly for
+    every endpoint
+- WebSocket/HTTP API of the add-on is unchanged; no Home Assistant
+  integration update is required
+
 ## [1.1.0] - 2026-03-05
 
 ### Added
