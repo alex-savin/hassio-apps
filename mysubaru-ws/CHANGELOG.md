@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2026-06-22
+
+### Fixed
+
+- **Valet status errors for vehicles without valet mode** (via go-mysubaru
+  v2.0.1): `GET /vehicle/{vin}/valet_status` no longer logs
+  `error parsing response` / `get valet status failed` on every dashboard
+  reconnect. The MySubaru backend returns the valet `data` field as a plain
+  string for vehicles that don't have valet mode provisioned; the library now
+  treats that as a disabled configuration instead of a JSON unmarshal error.
+
 ## [1.2.0] - 2026-06-12
 
 ### Changed
