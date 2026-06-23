@@ -1,0 +1,12 @@
+---
+configuration:
+  log_level:
+    name: 日志级别
+    description: 日志记录的详细程度（debug、info、warn、error）。
+  poll_interval_seconds:
+    name: 轮询间隔
+    description: 轮询扫地机设备状态的频率（秒）。
+  map_poll_interval_seconds:
+    name: 地图轮询间隔
+    description: >-
+      清扫进行时刷新实时扫地机地图的频率（秒，最小值为 2，设为 0 可禁用实时地图推送）。

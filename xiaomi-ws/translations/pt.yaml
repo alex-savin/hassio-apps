@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Nível de Registo
+    description: O detalhe dos registos (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervalo de Sondagem
+    description: Com que frequência sondar o estado do aspirador, em segundos.
+  map_poll_interval_seconds:
+    name: Intervalo de Sondagem do Mapa
+    description: >-
+      Com que frequência atualizar o mapa em direto do aspirador enquanto uma
+      limpeza está a decorrer, em segundos (mínimo 2, 0 para desativar a
+      transmissão do mapa em direto).

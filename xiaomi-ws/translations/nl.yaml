@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Logniveau
+    description: De uitgebreidheid van de logging (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Pollinterval
+    description: Hoe vaak de status van het stofzuigerapparaat wordt opgevraagd, in seconden.
+  map_poll_interval_seconds:
+    name: Pollinterval kaart
+    description: >-
+      Hoe vaak de live stofzuigerkaart wordt vernieuwd terwijl een
+      schoonmaakbeurt loopt, in seconden (minimaal 2, 0 om live kaartstreaming
+      uit te schakelen).

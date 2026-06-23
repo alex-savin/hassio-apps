@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Niveau de journalisation
+    description: La verbosité de la journalisation (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervalle d'interrogation
+    description: Fréquence d'interrogation de l'état de l'aspirateur, en secondes.
+  map_poll_interval_seconds:
+    name: Intervalle d'interrogation de la carte
+    description: >-
+      Fréquence de rafraîchissement de la carte en direct de l'aspirateur
+      pendant un nettoyage en cours, en secondes (minimum 2, 0 pour désactiver
+      la diffusion de la carte en direct).

@@ -1,0 +1,13 @@
+---
+configuration:
+  log_level:
+    name: Рівень журналювання
+    description: Деталізація журналювання (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Інтервал опитування
+    description: Як часто опитувати стан робота-пилососа, у секундах.
+  map_poll_interval_seconds:
+    name: Інтервал опитування мапи
+    description: >-
+      Як часто оновлювати живу мапу пилососа під час прибирання, у
+      секундах (мінімум 2, 0 — щоб вимкнути потокову передачу живої мапи).

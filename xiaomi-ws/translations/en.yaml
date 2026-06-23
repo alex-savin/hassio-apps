@@ -1,0 +1,13 @@
+---
+configuration:
+  log_level:
+    name: Log Level
+    description: The verbosity of logging (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Poll Interval
+    description: How often to poll vacuum device status in seconds.
+  map_poll_interval_seconds:
+    name: Map Poll Interval
+    description: >-
+      How often to refresh the live vacuum map while a clean is running, in
+      seconds (minimum 2, 0 to disable live map streaming).

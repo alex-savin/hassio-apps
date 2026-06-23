@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Protokollstufe
+    description: Die Ausführlichkeit der Protokollierung (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Abrufintervall
+    description: Wie oft der Status des Saugroboters abgefragt wird, in Sekunden.
+  map_poll_interval_seconds:
+    name: Karten-Abrufintervall
+    description: >-
+      Wie oft die Live-Karte des Saugroboters während einer laufenden Reinigung
+      aktualisiert wird, in Sekunden (Minimum 2, 0 zum Deaktivieren des
+      Live-Karten-Streamings).

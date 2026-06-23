@@ -1,0 +1,14 @@
+---
+configuration:
+  log_level:
+    name: Livello di log
+    description: Il livello di dettaglio del logging (debug, info, warn, error).
+  poll_interval_seconds:
+    name: Intervallo di polling
+    description: Con quale frequenza interrogare lo stato del robot aspirapolvere, in secondi.
+  map_poll_interval_seconds:
+    name: Intervallo di polling della mappa
+    description: >-
+      Con quale frequenza aggiornare la mappa live del robot aspirapolvere
+      durante una pulizia, in secondi (minimo 2, 0 per disabilitare lo
+      streaming della mappa live).
