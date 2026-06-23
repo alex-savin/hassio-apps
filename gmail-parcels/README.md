@@ -1,196 +1,67 @@
-# Gmail Parcels Tracker - v3 (Hybrid Architecture)
+# hassio-app-gmail-parcels
 
-A Home Assistant addon that monitors Gmail for shipping notifications and tracks parcel deliveries. This version uses a **hybrid architecture**: deterministic regex + checksum validation for tracking numbers, with optional ONNX-based NER for soft data extraction.
+Home Assistant add-on that packages the
+**[go-gmail-parcels](https://github.com/alex-savin/go-gmail-parcels)** service:
+it watches Gmail for shipping notifications, extracts parcel data, and exposes a
+WebSocket/REST API that the
+**[hassio-integration-gmail-parcels](https://github.com/alex-savin/hassio-integration-gmail-parcels)**
+component consumes.
 
-## Features
+The Go service is **not** copied into this repo — it is included as the `src/`
+git submodule and built by the Docker image.
 
-### Parcel Tracking
-- **Multi-carrier support**: UPS, FedEx, USPS, DHL, Amazon Logistics, OnTrac, LaserShip
-- **Checksum validation**: Validates tracking numbers using carrier-specific algorithms (Mod10, Mod7, S10)
-- **Amazon integration**: Extracts both TBA tracking numbers and Amazon Order IDs
-- **Status tracking**: Tracks parcel lifecycle (label created → in transit → out for delivery → delivered)
+## Repo layout
 
-### Data Extraction
-- **Tracking numbers**: Regex patterns with checksum validation (high confidence)
-- **Carrier detection**: Brand keyword matching + tracking number format inference
-- **Delivery dates**: Extracts estimated delivery from carrier emails
-- **Sender information**: Extracts shipper/merchant names
-- **Delivery proof**: Downloads and stores delivery photos locally
-- **Left-at location**: Extracts where package was left (Front Door, Mailbox, etc.)
+| Path | What |
+|------|------|
+| `Dockerfile` | Multi-stage build: ONNX Runtime → Go build from `src/` → HA add-on (s6) |
+| `config.yaml` | HA add-on manifest (name, version, options schema, ports) |
+| `rootfs/` | s6 service: generates the runtime config from add-on options, runs the binary |
+| `build.sh` | Convenience wrapper around `docker build` |
+| `src/` | **submodule** → go-gmail-parcels (the service source) |
 
-### Persistence & History
-- **JSON file storage**: Persists to `/data/parcels.json`
-- **Status history**: Tracks all status changes with timestamps
-- **Auto-archive**: Archives delivered parcels after 7 days
-- **Retention policy**: Removes archived parcels after 30 days
-- **Photo storage**: Saves delivery proof images to `/data/photos/`
+## NER model (downloaded at runtime)
 
-### Gmail Integration
-- **OAuth2 authentication**: Supports multiple Gmail accounts
-- **Push notifications**: Uses Google Cloud Pub/Sub for real-time email notifications
-- **Per-account filtering**: Prevents cross-account message fetching
-- **Retry logic**: Handles 404 errors with exponential backoff
+The NER model is **not** baked into the image. On first start the add-on
+downloads `model.onnx`, `vocab.txt` and `labels.txt` from the public
+[gmail-parcels-model](https://github.com/alex-savin/gmail-parcels-model)
+release into `/data/onnx-out` (cached across restarts) and links it to
+`/app/onnx-out`. If the download fails, the service falls back to a regex-only
+extractor. Override the source with the `MODEL_BASE_URL` env var. This keeps the
+image small (~60–80 MB instead of ~300 MB).
 
-## Architecture
+## Build prerequisites
 
+Two gitignored artifacts must be present before building:
+
+1. **`src/`** — initialize the submodule:
+   ```bash
+   git submodule update --init
+   ```
+2. **`onnxruntime-linux-x64-1.27.0.tgz`** — from
+   [microsoft/onnxruntime releases](https://github.com/microsoft/onnxruntime/releases);
+   the binary links against ONNX Runtime (the model itself is not needed to build).
+
+## Build
+
+```bash
+./build.sh                       # amd64 -> local/gmail-parcels-addon-amd64
+TARGETARCH=arm64 ./build.sh
+IMAGE_TAG=ghcr.io/alex-savin/gmail-parcels-addon-amd64:0.0.2 ./build.sh
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                         Email Processing                         │
-├─────────────────────────────────────────────────────────────────┤
-│  1. Gmail Push Notification (Pub/Sub)                           │
-│  2. Fetch message content                                        │
-│  3. HARD DATA: Tracking detector (regex + checksum)             │
-│  4. SOFT DATA: NER extraction (status, date, sender, photos)    │
-│  5. Store to persistent JSON                                     │
-│  6. Notify Home Assistant                                        │
-└─────────────────────────────────────────────────────────────────┘
+
+## Updating the service
+
+Point the submodule at a newer go-gmail-parcels commit and rebuild:
+
+```bash
+cd src && git pull origin main && cd ..
+git add src && git commit -m "Bump go-gmail-parcels"
 ```
-
-### Hybrid Detection Strategy
-
-| Data Type | Method | Confidence |
-|-----------|--------|------------|
-| Tracking Number | Regex + Checksum | High (validated) |
-| Carrier | Brand keywords + TN format | High |
-| Status | Keyword matching | Medium |
-| Delivery Date | Regex patterns | Medium |
-| Sender | Regex patterns | Medium |
-| Photo/LeftAt | Regex patterns | Medium |
 
 ## Configuration
 
-```yaml
-# config.yaml
-accounts:
-  - email: "user@gmail.com"
-    credentials_file: "/data/credentials.json"
-    token_file: "/data/token.json"
-
-pubsub:
-  project_id: "your-gcp-project"
-  subscription: "gmail-parcels-sub"
-
-server:
-  port: 8080
-```
-
-## API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/healthz` | GET | Health check |
-| `/parcels` | GET | List active parcels |
-| `/parcels/archived` | GET | List archived parcels |
-| `/push` | POST | Receive Pub/Sub notifications |
-
-## Building
-
-### Local Development
-```bash
-# Build without ONNX (regex-only)
-go build -o app ./cmd/...
-
-# Build with ONNX support
-go build -tags onnx -o app ./cmd/...
-```
-
-### Docker (Home Assistant Addon)
-```bash
-# Build the addon image
-./build.sh
-
-# Or manually
-docker build -f Dockerfile.addon -t gmail-parcels-v3 .
-```
-
-## Supported Carriers
-
-| Carrier | Tracking Format | Checksum |
-|---------|-----------------|----------|
-| UPS | 1Z + 16 alnum | Mod10 |
-| FedEx | 12, 15, 20, 22 digits | Mod10 |
-| USPS | 20-22 digits (9xxx) | Mod10 |
-| USPS International | 2 letters + 9 digits + US | S10 |
-| DHL Express | 10 digits | Mod7 |
-| Amazon | TBA + 12-15 digits | None |
-| OnTrac | C + 14 digits | None |
-| LaserShip | 1LS + digits | None |
-
-## Parcel Data Model
-
-```json
-{
-  "tracking_number": "1Z999AA10123456784",
-  "carrier": "UPS",
-  "status": "delivered",
-  "estimated_delivery": "2026-01-15",
-  "sender": "Amazon.com",
-  "created_at": "2026-01-10T10:00:00Z",
-  "last_updated": "2026-01-15T14:30:00Z",
-  "delivered_at": "2026-01-15T14:30:00Z",
-  "status_history": [
-    {"status": "label created", "timestamp": "2026-01-10T10:00:00Z"},
-    {"status": "in transit", "timestamp": "2026-01-12T08:00:00Z"},
-    {"status": "out for delivery", "timestamp": "2026-01-15T06:00:00Z"},
-    {"status": "delivered", "timestamp": "2026-01-15T14:30:00Z"}
-  ],
-  "photo_proof": "/data/photos/1Z999AA10123456784.jpg",
-  "left_at": "Front Door",
-  "amazon_order_id": "123-4567890-1234567"
-}
-```
-
-## ONNX Model (Optional)
-
-The addon can optionally use an ONNX-exported DistilBERT model for NER extraction. This is used for soft data (status, sender) when regex patterns don't match.
-
-### Artifacts
-- `onnx-out/model.onnx` - The ONNX model
-- `onnx-out/vocab.txt` - WordPiece vocabulary
-- `onnx-out/labels.txt` - BIO label mapping
-
-### Export Recipe
-```bash
-python scripts/export_onnx.py \
-  --model ./model_dir \
-  --output ./onnx-out \
-  --opset 17 \
-  --max-seq-length 256 \
-  --validate
-```
-
-## Development
-
-### Project Structure
-```
-go-gmail-parcels-v3-pure/
-├── cmd/                    # Main application
-├── internal/
-│   ├── api/               # HTTP server & endpoints
-│   ├── gmail/             # Gmail API client
-│   ├── ner/               # NER extraction (regex + ONNX)
-│   ├── photo/             # Delivery photo downloader
-│   ├── state/             # Parcel store & persistence
-│   └── tracking/          # Tracking number detector
-├── config/                # Configuration types
-├── rootfs/                # S6 overlay scripts
-├── onnx-out/              # ONNX model artifacts
-└── scripts/               # Build & export scripts
-```
-
-### Running Tests
-```bash
-# All tests
-go test ./...
-
-# With ONNX
-go test -tags onnx ./...
-
-# Specific package
-go test -v ./internal/tracking/...
-go test -v ./internal/ner/...
-```
-
-## License
-
-MIT
+Configured through the Home Assistant add-on options (see `config.yaml` schema):
+per-account Gmail credentials/token file names, Pub/Sub project/topic/subscription,
+optional carrier whitelist, and log level. The s6 `run` script renders these into
+the service's `config.yaml` at startup.

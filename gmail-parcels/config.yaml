@@ -1,13 +1,11 @@
 ---
 name: "Gmail Parcels"
-version: "0.0.2"
+version: "1.0.1"
 slug: "gmail_parcels"
 description: "Track parcels from Gmail emails using AI"
 url: "https://github.com/alex-savin/hassio-apps/gmail-parcels"
 arch:
   - amd64
-startup: application
-boot: auto
 init: false
 ports:
   8080/tcp: 8080
