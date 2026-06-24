@@ -115,6 +115,35 @@ token. Sender/recipient stay from the email parser — the public APIs redact th
 | `ups_poll_minutes` | refresh interval, default **45** (5–1440) |
 | `ups_sandbox` | `true` only for the UPS CIE sandbox; otherwise `false` |
 
+### USPS
+
+USPS replaced Web Tools with **OAuth2 v3 APIs**.
+
+1. Register at **<https://developer.usps.com>** → **Add App** → add the
+   **Tracking** API. Copy the **Consumer Key** and **Consumer Secret**.
+
+| Option | Value |
+|--------|-------|
+| `usps_client_id` | USPS **Consumer Key** |
+| `usps_client_secret` | USPS **Consumer Secret** (masked) |
+| `usps_poll_minutes` | refresh interval, default **45** (5–1440) |
+| `usps_sandbox` | `true` only for the TEM test host; otherwise `false` |
+
+### DHL
+
+DHL uses a single **API key** (no OAuth).
+
+1. At **<https://developer.dhl.com>** → **Create App** → add **Shipment Tracking
+   — Unified**. Copy the **API Key**.
+
+| Option | Value |
+|--------|-------|
+| `dhl_api_key` | DHL **API Key** (masked) |
+| `dhl_poll_minutes` | refresh interval, default **45** (5–1440) |
+
+> DHL's free tier is ~250 calls/day, 1 call / 5 s — the add-on spaces its DHL
+> calls accordingly.
+
 Save + restart after entering keys.
 
 ## How it works

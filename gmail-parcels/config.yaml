@@ -1,6 +1,6 @@
 ---
 name: "Gmail Parcels"
-version: "1.3.0"
+version: "1.4.0"
 slug: "gmail_parcels"
 description: "Track parcels from Gmail emails using AI"
 url: "https://github.com/alex-savin/hassio-apps/gmail-parcels"
@@ -26,6 +26,12 @@ options:
   ups_client_secret: ""
   ups_poll_minutes: 45
   ups_sandbox: false
+  usps_client_id: ""
+  usps_client_secret: ""
+  usps_poll_minutes: 45
+  usps_sandbox: false
+  dhl_api_key: ""
+  dhl_poll_minutes: 45
 schema:
   log_level: "list(debug|info|warn|error)"
   accounts:
@@ -47,6 +53,14 @@ schema:
   ups_client_secret: "password?"
   ups_poll_minutes: "int(5,1440)?"
   ups_sandbox: "bool?"
+  # Optional: USPS v3 Tracking API enrichment (live status/ETA).
+  usps_client_id: "str?"
+  usps_client_secret: "password?"
+  usps_poll_minutes: "int(5,1440)?"
+  usps_sandbox: "bool?"
+  # Optional: DHL Unified Tracking API enrichment (API key).
+  dhl_api_key: "password?"
+  dhl_poll_minutes: "int(5,1440)?"
 environment:
   WS_LISTEN_ADDR: ":8080"
 # Web UI via Home Assistant Ingress (proxied + authenticated by HA; the add-on

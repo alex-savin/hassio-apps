@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-06-24
+
+### Added
+
+- **USPS and DHL live tracking (optional).** Carrier enrichment now covers all
+  four carriers. Set `usps_client_id`/`usps_client_secret` (USPS v3 OAuth2) and/or
+  `dhl_api_key` (DHL Unified Tracking, API key) to poll live status/ETA/delivery
+  for active USPS/DHL parcels, the same way FedEx and UPS already work. Off by
+  default; see the docs for creating each carrier's keys. DHL calls are spaced to
+  respect its free-tier rate limit.
+
 ## [1.3.0] - 2026-06-24
 
 ### Added
