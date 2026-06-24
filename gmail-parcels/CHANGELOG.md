@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-06-24
+
+### Added
+
+- **UPS Tracking API enrichment (optional).** Like the FedEx one, but for UPS:
+  set `ups_client_id` / `ups_client_secret` and the add-on polls the UPS
+  Tracking API for active UPS parcels (`ups_poll_minutes`, default 45) and
+  merges live status, ETA, delivery time, and delivery location back in. Off by
+  default; see the docs for creating UPS API keys. FedEx and UPS are independent.
+
+### Changed
+
+- Carrier live-tracking is now a shared mechanism (one poller drives both FedEx
+  and UPS), so future carriers are easy to add.
+
 ## [1.2.0] - 2026-06-24
 
 ### Added

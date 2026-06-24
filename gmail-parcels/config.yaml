@@ -1,6 +1,6 @@
 ---
 name: "Gmail Parcels"
-version: "1.2.0"
+version: "1.3.0"
 slug: "gmail_parcels"
 description: "Track parcels from Gmail emails using AI"
 url: "https://github.com/alex-savin/hassio-apps/gmail-parcels"
@@ -22,6 +22,10 @@ options:
   fedex_secret_key: ""
   fedex_poll_minutes: 45
   fedex_sandbox: false
+  ups_client_id: ""
+  ups_client_secret: ""
+  ups_poll_minutes: 45
+  ups_sandbox: false
 schema:
   log_level: "list(debug|info|warn|error)"
   accounts:
@@ -38,6 +42,11 @@ schema:
   fedex_secret_key: "password?"
   fedex_poll_minutes: "int(5,1440)?"
   fedex_sandbox: "bool?"
+  # Optional: UPS Tracking API enrichment (live status/ETA).
+  ups_client_id: "str?"
+  ups_client_secret: "password?"
+  ups_poll_minutes: "int(5,1440)?"
+  ups_sandbox: "bool?"
 environment:
   WS_LISTEN_ADDR: ":8080"
 # Web UI via Home Assistant Ingress (proxied + authenticated by HA; the add-on

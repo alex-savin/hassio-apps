@@ -76,21 +76,23 @@ accounts:
 | `accounts[].subscription_id` | Pub/Sub pull subscription the add-on consumes. |
 | `accounts[].carriers` | Whitelist of carriers to keep (e.g. `UPS`, `FedEx`, `DHL`). Empty = accept all. Amazon-originated mail is always ignored (handled by a separate project). |
 
-## FedEx Track enrichment (optional)
+## Carrier live tracking (optional)
 
-The add-on can pull **live status/ETA for FedEx parcels** straight from FedEx
-(not just from emails), so they stay current between notifications and are still
-updated if an email is missed. It's off until you add FedEx API keys.
+The add-on can pull **live status/ETA straight from the carrier** (not just from
+emails), so parcels stay current between notifications and update even if an
+email is missed. It's off until you add API keys. **FedEx** and **UPS** are
+supported; each is independent — enable either, both, or neither.
 
-**Get free FedEx API keys:**
+It refreshes status, ETA, delivery time, and delivery location for active
+(non-delivered) parcels every `*_poll_minutes` (default 45), caching the OAuth
+token. Sender/recipient stay from the email parser — the public APIs redact them.
 
-1. Sign up at **<https://developer.fedex.com>**.
-2. **My Projects → Create API Project**, and add the **Track API**.
-3. Open the project and copy the **API Key** (client id) and **Secret Key**.
-   Use the **Production** pair for real parcels; the **Test** pair only returns
-   FedEx's mock tracking numbers.
+### FedEx
 
-**Configure** (add-on Configuration tab):
+1. Sign up at **<https://developer.fedex.com>** → **Create API Project** → add the
+   **Track API**.
+2. Copy the **API Key** and **Secret Key** (use the **Production** pair for real
+   parcels; **Test** keys only return FedEx mock numbers).
 
 | Option | Value |
 |--------|-------|
@@ -99,10 +101,21 @@ updated if an email is missed. It's off until you add FedEx API keys.
 | `fedex_poll_minutes` | refresh interval, default **45** (5–1440) |
 | `fedex_sandbox` | `true` only with **Test** keys; otherwise `false` |
 
-Save + restart. It refreshes status, ETA, delivery time, and delivery location
-for active FedEx parcels (batched, with a cached OAuth token). Sender/recipient
-stay from the email parser — the public Track API usually redacts them. Only
-FedEx is covered today.
+### UPS
+
+1. Have a **UPS account number** (free at <https://www.ups.com>).
+2. At **<https://developer.ups.com>** → **Add Apps**, associate your account
+   number and add the **Tracking API**. Copy the **Client ID** and **Client
+   Secret**.
+
+| Option | Value |
+|--------|-------|
+| `ups_client_id` | UPS **Client ID** |
+| `ups_client_secret` | UPS **Client Secret** (masked) |
+| `ups_poll_minutes` | refresh interval, default **45** (5–1440) |
+| `ups_sandbox` | `true` only for the UPS CIE sandbox; otherwise `false` |
+
+Save + restart after entering keys.
 
 ## How it works
 
