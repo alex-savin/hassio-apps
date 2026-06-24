@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-06-24
+
+### Added
+
+- **Edit carrier API credentials from the web UI.** A new **⚙ Settings** panel
+  lets you set/change FedEx/UPS/USPS/DHL keys and poll intervals from the
+  dashboard, applied **live** (no add-on restart). It's reachable only through
+  the authenticated Home Assistant UI (ingress), masks saved secrets on display,
+  and stores overrides in `/data` (layered over the add-on Configuration values;
+  "Clear" reverts a carrier to the add-on config).
+
 ## [1.4.0] - 2026-06-24
 
 ### Added

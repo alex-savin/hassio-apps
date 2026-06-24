@@ -80,12 +80,17 @@ accounts:
 
 The add-on can pull **live status/ETA straight from the carrier** (not just from
 emails), so parcels stay current between notifications and update even if an
-email is missed. It's off until you add API keys. **FedEx** and **UPS** are
-supported; each is independent — enable either, both, or neither.
+email is missed. It's off until you add API keys. **FedEx, UPS, USPS, and DHL**
+are supported; each is independent — enable any combination.
 
 It refreshes status, ETA, delivery time, and delivery location for active
-(non-delivered) parcels every `*_poll_minutes` (default 45), caching the OAuth
-token. Sender/recipient stay from the email parser — the public APIs redact them.
+(non-delivered) parcels every `*_poll_minutes` (default 45). Sender/recipient
+stay from the email parser — the public APIs redact them.
+
+> **Two ways to set the keys:** the add-on **Configuration** tab (below), or the
+> **⚙ Settings** panel in the web UI — which applies changes **live** (no
+> restart). The web-UI editor is reachable only through the authenticated Home
+> Assistant UI, masks saved secrets, and stores overrides in `/data`.
 
 ### FedEx
 
