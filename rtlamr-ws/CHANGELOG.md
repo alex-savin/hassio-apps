@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-24
+
+### Fixed
+
+- **rtlamr auto-restart**: the crash-recovery path never triggered because
+  process liveness was checked via `cmd.ProcessState` (only set by `Wait()`),
+  so a crashed rtlamr left the reader loop spinning at 100% CPU and never
+  restarted. Liveness is now determined by stdout EOF and the process is
+  reaped before restart (no more zombies).
+- **Lost readings on restart**: a second `bufio.Scanner` was created on the
+  process pipe after startup, discarding any output the first scanner had
+  buffered. A single scanner is now reused for the process lifetime.
+- **`formatNumber` leading zeros**: a value narrower than the format width
+  rendered as `001234.567` instead of the documented `1234.567`. Leading
+  zeros in the integer part are now stripped.
+- **`WS_LISTEN_ADDR` ignored**: the listen address env var was set in config
+  but never read; the port was hard-coded to `:8080`. It is now honored.
+- **`RTLAMR_CONFIG_PATH` ignored**: the env var set in the Dockerfile is now
+  used as a fallback when `-config` is not passed.
+- **Dead `log_level` option**: the s6 run script read a non-existent
+  `log_level` option; it now surfaces the real `general.verbosity`.
+
+### Added
+
+- `expire_after` and `force_update` meter options are now parsed and forwarded
+  in the WebSocket `attributes` (previously validated by the schema but
+  dropped by the service).
+- WebSocket keepalive (ping/pong with read deadline) so dead clients are
+  detected promptly.
+- Go unit tests for config loading, parsing, formatting, and argument builders.
+
+### Changed
+
+- Health endpoint (`/health`, `/healthz`) now returns a plain-text `ok` body
+  with a `200` status, matching the sibling mysubaru-ws add-on (was JSON
+  `{"status":"ok"}`). Clients should rely on the status code, not the body.
+- Broadcasts no longer hold the hub lock during network writes; each
+  connection has its own write mutex, so one slow client can't stall others.
+- Updated `rtlamr` to `v0.9.5` (was `v0.9.1`).
+- Migrated CI/CD off the deprecated `home-assistant/builder` action to the
+  `prepare-multi-arch-matrix` + `build-image` reusable actions (which run
+  `docker buildx` directly, with no builder container image); CD now signs
+  published images with cosign.
+- Pinned rtl-sdr to `v2.0.2` in the Dockerfile (was an unpinned `master`
+  clone) for reproducible builds.
+- Aligned Go toolchain to 1.26 across `go.mod`, the Dockerfile, and `build.sh`.
+- Rewrote `build.sh` for the current (flat) repository layout.
+
 ## [1.0.1] - 2026-01-12
 
 ### Changed
@@ -55,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `custom_parameters.rtlamr` - Additional rtlamr arguments
 - `meters` - List of meter configurations with protocol, format, and Home Assistant attributes
 
-[Unreleased]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/compare/1.0.1...HEAD
-[1.0.1]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/compare/1.0.0...1.0.1
-[1.0.0]: https://github.com/alex-savin/hassio-addon-rtlamr-ws/releases/tag/1.0.0
+[Unreleased]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.0.1...1.1.0
+[1.0.1]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.0.0...1.0.1
+[1.0.0]: https://github.com/alex-savin/hassio-app-rtlamr-ws/releases/tag/1.0.0

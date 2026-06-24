@@ -1,9 +1,9 @@
 # RTLAMR WebSocket Add-on for Home Assistant
 
 [![Add add-on to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falex-savin%2Fhassio-apps)
-[![CI](https://github.com/alex-savin/hassio-addon-rtlamr-ws/actions/workflows/ci.yaml/badge.svg)](https://github.com/alex-savin/hassio-addon-rtlamr-ws/actions/workflows/ci.yaml)
-[![GitHub Release](https://img.shields.io/github/v/release/alex-savin/hassio-addon-rtlamr-ws)](https://github.com/alex-savin/hassio-addon-rtlamr-ws/releases)
-[![License](https://img.shields.io/github/license/alex-savin/hassio-addon-rtlamr-ws)](LICENSE)
+[![CI](https://github.com/alex-savin/hassio-app-rtlamr-ws/actions/workflows/ci.yaml/badge.svg)](https://github.com/alex-savin/hassio-app-rtlamr-ws/actions/workflows/ci.yaml)
+[![GitHub Release](https://img.shields.io/github/v/release/alex-savin/hassio-app-rtlamr-ws)](https://github.com/alex-savin/hassio-app-rtlamr-ws/releases)
+[![License](https://img.shields.io/github/license/alex-savin/hassio-app-rtlamr-ws)](LICENSE)
 
 A Home Assistant add-on that reads utility meters (water, gas, electric) using an RTL-SDR dongle and broadcasts readings over WebSocket. Built in Go for high performance and low resource usage.
 
@@ -85,6 +85,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- 🐛 [Report a Bug](https://github.com/alex-savin/hassio-addon-rtlamr-ws/issues/new?template=bug_report.md)
-- 💡 [Request a Feature](https://github.com/alex-savin/hassio-addon-rtlamr-ws/issues/new?template=feature_request.md)
-- 💬 [Discussions](https://github.com/alex-savin/hassio-addon-rtlamr-ws/discussions)
+- 🐛 [Report a Bug](https://github.com/alex-savin/hassio-app-rtlamr-ws/issues/new?template=bug_report.md)
+- 💡 [Request a Feature](https://github.com/alex-savin/hassio-app-rtlamr-ws/issues/new?template=feature_request.md)
+- 💬 [Discussions](https://github.com/alex-savin/hassio-app-rtlamr-ws/discussions)

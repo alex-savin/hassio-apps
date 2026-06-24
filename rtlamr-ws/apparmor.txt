@@ -8,19 +8,20 @@ profile rtlamr_ws flags=(attach_disconnected,mediate_deleted) {
   signal,
 
   # Capabilities
+  # Least-privilege set matching the sibling mysubaru-ws add-on. USB/SDR access
+  # is granted via the /dev/bus/usb file rules below (plus usb/udev in
+  # config.yaml), not Linux capabilities — so sys_admin, sys_rawio and
+  # dac_read_search are intentionally omitted.
   capability net_bind_service,
   capability net_raw,
   capability chown,
   capability dac_override,
-  capability dac_read_search,
   capability setuid,
   capability setgid,
   capability fowner,
   capability fsetid,
   capability kill,
   capability sys_chroot,
-  capability sys_admin,
-  capability sys_rawio,
 
   # Network access
   network inet stream,

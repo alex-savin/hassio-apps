@@ -23,7 +23,7 @@ The add-on uses three components working together:
 | Option | Default | Description |
 |--------|---------|-------------|
 | `sleep_for` | `60` | Seconds between reading cycles |
-| `verbosity` | `info` | Log level: `debug`, `info`, `warning`, `critical`, `none` |
+| `verbosity` | `info` | Log level: `debug`, `info`, `warn`, `error` |
 | `device_id` | `"0"` | RTL-SDR device index |
 | `rtltcp_host` | `""` | External rtl_tcp server (optional) |
 
@@ -99,7 +99,8 @@ Readings are broadcast as JSON:
 ```json
 {
   "meter_id": "12345678",
-  "value": "1234.567",
+  "reading": "1234.567",
+  "last_seen": "2026-01-12T10:30:00Z",
   "attributes": {
     "meter_name": "water",
     "protocol": "r900",
@@ -128,6 +129,6 @@ The add-on requires USB, UART, and udev access which are configured automaticall
 
 ## Support
 
-- [Documentation](https://github.com/alex-savin/hassio-addon-rtlamr-ws/tree/main/docs)
-- [Report Issues](https://github.com/alex-savin/hassio-addon-rtlamr-ws/issues)
-- [Discussions](https://github.com/alex-savin/hassio-addon-rtlamr-ws/discussions)
+- [Documentation](https://github.com/alex-savin/hassio-app-rtlamr-ws/tree/main/docs)
+- [Report Issues](https://github.com/alex-savin/hassio-app-rtlamr-ws/issues)
+- [Discussions](https://github.com/alex-savin/hassio-app-rtlamr-ws/discussions)
