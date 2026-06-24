@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-24
+
+### Added
+
+- **FedEx Track API enrichment (optional).** When FedEx developer API keys are
+  configured (`fedex_api_key` / `fedex_secret_key`), the add-on polls the FedEx
+  Track API for every active FedEx parcel on an interval (`fedex_poll_minutes`,
+  default 45) and merges live **status, ETA, delivery time, and delivery
+  location** back in — so parcels stay current between emails and are updated
+  even if an email is missed. Batches up to 30 numbers per call, caches the
+  OAuth token, and keeps the Secret Key out of the log. Off by default; see the
+  docs for how to create the keys. Sender/recipient stay from the email parser
+  (the public Track API usually redacts them); FedEx-only for now.
+
 ## [1.1.2] - 2026-06-24
 
 ### Fixed

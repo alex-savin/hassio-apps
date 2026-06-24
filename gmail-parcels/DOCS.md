@@ -76,6 +76,34 @@ accounts:
 | `accounts[].subscription_id` | Pub/Sub pull subscription the add-on consumes. |
 | `accounts[].carriers` | Whitelist of carriers to keep (e.g. `UPS`, `FedEx`, `DHL`). Empty = accept all. Amazon-originated mail is always ignored (handled by a separate project). |
 
+## FedEx Track enrichment (optional)
+
+The add-on can pull **live status/ETA for FedEx parcels** straight from FedEx
+(not just from emails), so they stay current between notifications and are still
+updated if an email is missed. It's off until you add FedEx API keys.
+
+**Get free FedEx API keys:**
+
+1. Sign up at **<https://developer.fedex.com>**.
+2. **My Projects → Create API Project**, and add the **Track API**.
+3. Open the project and copy the **API Key** (client id) and **Secret Key**.
+   Use the **Production** pair for real parcels; the **Test** pair only returns
+   FedEx's mock tracking numbers.
+
+**Configure** (add-on Configuration tab):
+
+| Option | Value |
+|--------|-------|
+| `fedex_api_key` | FedEx **API Key** |
+| `fedex_secret_key` | FedEx **Secret Key** (masked) |
+| `fedex_poll_minutes` | refresh interval, default **45** (5–1440) |
+| `fedex_sandbox` | `true` only with **Test** keys; otherwise `false` |
+
+Save + restart. It refreshes status, ETA, delivery time, and delivery location
+for active FedEx parcels (batched, with a cached OAuth token). Sender/recipient
+stay from the email parser — the public Track API usually redacts them. Only
+FedEx is covered today.
+
 ## How it works
 
 - On start the add-on calls Gmail `users.watch` (renewed every 24 h, since
