@@ -1,9 +1,9 @@
 # UPS Monitor Home Assistant Add-on
 
 [![Add add-on to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falex-savin%2Fhassio-apps)
-[![GitHub Release](https://img.shields.io/github/v/release/alex-savin/hassio-addon-ups-monitor)](https://github.com/alex-savin/hassio-addon-ups-monitor/releases)
-[![CI](https://github.com/alex-savin/hassio-addon-ups-monitor/actions/workflows/ci.yaml/badge.svg)](https://github.com/alex-savin/hassio-addon-ups-monitor/actions/workflows/ci.yaml)
-[![License](https://img.shields.io/github/license/alex-savin/hassio-addon-ups-monitor)](LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/alex-savin/hassio-app-ups-monitor)](https://github.com/alex-savin/hassio-app-ups-monitor/releases)
+[![CI](https://github.com/alex-savin/hassio-app-ups-monitor/actions/workflows/ci.yaml/badge.svg)](https://github.com/alex-savin/hassio-app-ups-monitor/actions/workflows/ci.yaml)
+[![License](https://img.shields.io/github/license/alex-savin/hassio-app-ups-monitor)](LICENSE)
 
 Real-time UPS monitoring for Home Assistant with support for apcupsd and NUT protocols.
 
