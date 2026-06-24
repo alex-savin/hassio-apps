@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2026-06-24
+
+### Added
+
+- **Recipient is now stored and served.** The NER model already detected a
+  `RECIPIENT`, but the parcel record had no field for it so it was dropped.
+  Added `Parcel.Recipient`, a SQLite column with an idempotent migration for
+  existing databases, and wired it through the API.
+
+### Fixed
+
+- **Estimated delivery date.** Relative wording ("scheduled for delivery
+  tomorrow", "out for delivery today") is now resolved to an absolute ISO
+  date against the email's `Date` header, and common absolute formats are
+  normalized to `YYYY-MM-DD`. Garbage spans such as `tomorrow 516602` (a
+  tracking-number fragment a greedy regex mistook for a date) are rejected.
+
+### Changed
+
+- Broadened sender extraction ("Sold by", "Sender:") and added conservative
+  recipient extraction ("Ship to:", "Recipient:") that ignores delivery
+  locations and street addresses. Note: FedEx Delivery Manager notifications
+  still won't populate a sender — they don't name the merchant.
+
 ## [1.0.3] - 2026-06-24
 
 ### Fixed
