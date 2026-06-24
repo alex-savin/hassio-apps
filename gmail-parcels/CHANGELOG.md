@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-06-24
+
+### Fixed
+
+- **False-positive parcels.** A marketing/listing email (e.g. an eBay deal)
+  whose body contained a number that happened to pass a carrier checksum could
+  be logged as a parcel. Parcel creation now requires a genuine shipping
+  signal — a detected status, an ETA, or a carrier From-header — so non-shipment
+  emails are dropped. ("on its way" / "has shipped" are also recognized as a
+  status so real merchant shipments still register.)
+
 ## [1.1.1] - 2026-06-24
 
 ### Fixed

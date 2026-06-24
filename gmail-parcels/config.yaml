@@ -1,6 +1,6 @@
 ---
 name: "Gmail Parcels"
-version: "1.1.1"
+version: "1.1.2"
 slug: "gmail_parcels"
 description: "Track parcels from Gmail emails using AI"
 url: "https://github.com/alex-savin/hassio-apps/gmail-parcels"
