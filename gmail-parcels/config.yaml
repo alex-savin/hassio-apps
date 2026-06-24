@@ -1,6 +1,6 @@
 ---
 name: "Gmail Parcels"
-version: "1.0.4"
+version: "1.1.0"
 slug: "gmail_parcels"
 description: "Track parcels from Gmail emails using AI"
 url: "https://github.com/alex-savin/hassio-apps/gmail-parcels"
@@ -31,4 +31,10 @@ schema:
         - str
 environment:
   WS_LISTEN_ADDR: ":8080"
+# Web UI via Home Assistant Ingress (proxied + authenticated by HA; the add-on
+# stays internal-only). Served on the same port as the API/WebSocket.
+ingress: true
+ingress_port: 8080
+panel_icon: mdi:package-variant-closed
+panel_title: Parcels
 image: "ghcr.io/alex-savin/gmail-parcels-addon-{arch}"

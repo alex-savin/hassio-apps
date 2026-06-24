@@ -88,9 +88,21 @@ accounts:
 - Detection is push-only — it processes mail that arrives **after** the add-on
   is running; it does not backfill mail received while it was stopped.
 
+## Web UI
+
+The add-on ships a built-in dashboard, served through Home Assistant **Ingress**
+(HA proxies and authenticates it; no host port is exposed). Open it from the
+**Parcels** entry in the HA sidebar, or via **Open Web UI** on the add-on page.
+
+It shows every parcel with carrier, status, ETA, and sender/recipient; tabs for
+**Active / Delivered / All**; and a per-parcel detail view with the full field
+set, the status-history timeline, the delivery-proof photo, and a **Track ↗**
+link to the carrier's site. It updates live over WebSocket (a dot in the header
+shows the connection state).
+
 ## API endpoints
 
-Served on port `8080` (consumed by the companion integration):
+Served on port `8080` (consumed by the companion integration and the web UI):
 
 | Endpoint | Purpose |
 |----------|---------|

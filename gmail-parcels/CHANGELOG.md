@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-24
+
+### Added
+
+- **Web UI (Home Assistant Ingress).** The add-on now serves a built-in
+  dashboard — open it from the **Parcels** sidebar panel (or the add-on's "Open
+  Web UI"). It lists every parcel with carrier, status, ETA, sender/recipient
+  and a live connection indicator; tabs for Active / Delivered / All; and a
+  detail view per parcel with the full field set, the status-history timeline,
+  the delivery-proof photo, and a "Track ↗" link to the carrier. Updates live
+  over WebSocket. Served on the existing port; the add-on stays internal-only
+  (HA proxies and authenticates ingress), no host port is exposed.
+
 ## [1.0.4] - 2026-06-24
 
 ### Added
