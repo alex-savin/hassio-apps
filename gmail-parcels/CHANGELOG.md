@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 2026-06-24
+
+### Changed
+
+- Web UI: each carrier block in the ⚙ Settings panel is now foldable
+  (collapsed by default) for a more compact layout.
+
 ## [1.5.0] - 2026-06-24
 
 ### Added
