@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-06-24
+
+### Fixed
+
+- **Recipient extraction.** FedEx Delivery Manager emails name the recipient
+  only in a greeting line ("Hi, &lt;Name&gt;.") and a To-block, which neither the
+  model nor the regex fallback caught — so parcels showed a sender but a blank
+  recipient. Added a greeting pattern (and guarded against generic greetings
+  like "Hi there"). Verified on real emails (recipient now populates).
+
 ## [1.1.0] - 2026-06-24
 
 ### Added
