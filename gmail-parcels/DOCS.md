@@ -33,6 +33,14 @@ one-time Google Cloud setup per mailbox is required:
 > The add-on only ever **reads** Gmail (`gmail.readonly`). It does not send,
 > modify, or delete mail.
 
+> **Publish the OAuth consent screen to "Production."** While it stays in
+> **Testing** (the default), Google expires the refresh token after **7 days**,
+> after which the add-on stops with `invalid_grant: Token has been expired or
+> revoked`. Publishing to Production gives a non-expiring refresh token — no
+> verification is needed for personal use (click through the "unverified app"
+> warning at consent). Generate the token **after** publishing, since tokens
+> minted in Testing keep the 7-day limit.
+
 ## Credential files
 
 Place the OAuth credential and token JSON files in the Home Assistant

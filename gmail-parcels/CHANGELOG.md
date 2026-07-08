@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-07-07
+
+Reliability, correctness, and security hardening from a full code review,
+prompted by an OAuth-token-expiry incident that took the add-on down silently.
+
+### Fixed
+
+- A follow-up email that couldn't extract the **sender/recipient** (or status)
+  no longer overwrites the values captured from an earlier email with blanks.
+- **USPS 22-digit** tracking numbers (`9400…`) are now detected as USPS instead
+  of being misread as FedEx.
+- The add-on no longer **crash-loops** when the Gmail OAuth token is expired or
+  revoked; it backs off and reports the condition instead of restarting in a
+  tight loop.
+- Duplicate or replayed emails no longer **resurrect archived parcels** or reset
+  their delivery date.
+- Assorted detection fixes: non-Amazon senders (e.g. `order-update@` at other
+  domains) are no longer skipped as Amazon; phone numbers and dates are no
+  longer accepted as tracking numbers; NER tokenizer and FedEx door-tag handling
+  corrected.
+
+### Added
+
+- **`/healthz` now reports real per-account state** (`listening` / `error` /
+  `auth_error`) so an expired OAuth grant is visible instead of a silent stall.
+- Delivery-proof **photos are deleted when a parcel is purged** by retention, so
+  `/data/photos` no longer grows without bound.
+- Documentation: the Google setup now covers publishing the OAuth consent screen
+  to **Production** to avoid the 7-day refresh-token expiry.
+
+### Changed
+
+- WebSocket delivery reworked (per-connection writer, deadlines, keepalive) so a
+  single stalled client can no longer block updates to everyone else.
+- The OAuth token file and the carrier-settings file are now written
+  **atomically**, preventing loss on a crash mid-write.
+
+### Security
+
+- The delivery-photo downloader re-checks the carrier-domain allowlist across
+  **redirects** (closing an SSRF path) and caps the download size.
+- The in-UI carrier-credentials endpoint now requires the Home Assistant ingress
+  gateway, not just a client-supplied header.
+
 ## [1.5.1] - 2026-06-24
 
 ### Changed
