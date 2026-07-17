@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-07-17
+
+### Fixed
+
+- **rtlamr never reached the main reading loop (entities stuck unavailable)**:
+  the readiness probe waited for the literal `GainCount:`, but rtlamr's
+  `v0.9.1 → v0.9.5` bump (in 1.1.0) switched its logging to logfmt, so it now
+  prints `GainCount=29` (no colon). `start()` never matched the signal, blocked
+  in its startup scan loop forever, and the parse/broadcast loop never ran —
+  meters decoded but nothing was ever sent to WebSocket clients. The readiness
+  markers are now constants that match both the old (`GainCount: 29`) and new
+  (`GainCount=29`) formats, guarded by a regression test.
+- **Unit tests were never tracked or run in CI**: a bare `rtlamr-ws` line in
+  `.gitignore` (meant for the repo-root build binary) also matched the
+  `cmd/rtlamr-ws/` source directory, so `main_test.go` could never be committed
+  and `go test ./...` ran with no tests. The pattern is now anchored to the root
+  binary (`/rtlamr-ws`) and the test suite is tracked.
+
+### Documentation
+
+- Corrected the "High CPU Usage" guidance: lowering rtl_tcp's `-s` has no effect
+  because rtlamr commands its own sample rate on connect. The effective knob is
+  `custom_parameters.rtlamr: "-symbollength=N"` (sample rate = `32768 × N`;
+  default 72 ≈ 2.36 MHz).
+
 ## [1.1.0] - 2026-06-24
 
 ### Fixed
@@ -103,7 +128,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `custom_parameters.rtlamr` - Additional rtlamr arguments
 - `meters` - List of meter configurations with protocol, format, and Home Assistant attributes
 
-[Unreleased]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.1.1...HEAD
+[1.1.1]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.0.1...1.1.0
 [1.0.1]: https://github.com/alex-savin/hassio-app-rtlamr-ws/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/alex-savin/hassio-app-rtlamr-ws/releases/tag/1.0.0
