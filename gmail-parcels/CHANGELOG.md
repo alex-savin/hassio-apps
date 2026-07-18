@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-07-18
+
+Ported three ideas from
+[Home-Assistant-Mail-And-Packages](https://github.com/moralmunky/Home-Assistant-Mail-And-Packages)
+(MIT).
+
+### Added
+
+- **USPS Informed Delivery** (mail, not parcels): the add-on recognizes the daily
+  Informed Delivery digest, stitches the embedded mail-scan images into a rotating
+  GIF, and reports a "mail arriving today" count. **No USPS login** — the scans
+  come from the email itself. New `/api/mail` and `/mail/today.gif` endpoints, and
+  a `mail` object on the `/ws` payload. The companion integration adds
+  `sensor.parcels_mail_today` (count + GIF url) in **v1.1.0**.
+
+### Changed
+
+- Carrier-sender detection now uses one canonical registry (cross-checked against
+  Mail-And-Packages), adding the `usps.gov` Informed Delivery sender and matching
+  carrier subdomains (e.g. `email-special.usps.com`).
+- A deterministic subject-line status classifier now guards the NER status output,
+  filling a missing status and flagging disagreements.
+
 ## [1.6.0] - 2026-07-07
 
 Reliability, correctness, and security hardening from a full code review,
